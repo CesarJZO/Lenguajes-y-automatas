@@ -1,7 +1,6 @@
 package practica_1;
 
 import java.util.Scanner;
-import java.lang.String;
 
 public class Hypo {
     public static void main(String[] args) {
