@@ -7,34 +7,37 @@ import java.util.regex.Pattern;
 public class Regex {
     static Scanner scanner;
     static String menu = """
-        Analizador léxico.
-            1. Identificadores
-            2. Números enteros
-            3. Comentarios
-            4. Operadores aritméticos
-            5. Operadores lógicos
-            6. Operadores relacionales
-            7. Palabras reservadas
-            8. Salir
-            """;
+            Analizador léxico.
+                1. Identificadores
+                2. Números enteros
+                3. Comentarios
+                4. Operadores aritméticos
+                5. Operadores lógicos
+                6. Operadores relacionales
+                7. Palabras reservadas
+                8. Salir
+
+                """;
+
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
-        
+
         mainMenu();
 
         scanner.close();
     }
 
-    public static void mainMenu(){
+    public static void mainMenu() {
         int option = 0;
         while (option != 8) {
-            System.out.println(menu);
+            System.out.print(menu);
             option = scanner.nextInt();
-            
+
             System.out.print("Componente léxico: ");
             String regex = scanner.nextLine();
-            
-            if (option == 8) return;
+
+            if (option == 8)
+                return;
 
             boolean found;
 
@@ -52,7 +55,7 @@ public class Regex {
             if (found)
                 System.out.println("Componente válido");
             else
-                System.out.println("Componente no válido");
+                System.out.println(ConsoleColor.RED + "Componente no válido");
         }
     }
 
@@ -62,10 +65,10 @@ public class Regex {
             case Identifier -> regex = "[a-z][a-z]$";
             case Integer -> regex = "\\d";
             default -> regex = "";
-        } 
+        }
 
         Pattern compiled = Pattern.compile(regex);
-        
+
         Matcher matcher = compiled.matcher(input);
 
         return matcher.find();
