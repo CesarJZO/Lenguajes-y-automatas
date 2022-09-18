@@ -1,5 +1,10 @@
 import re
 
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RED = '\033[91m'
+RESET = '\033[0m'
+
 menu = """
 Analizador léxico.
     1. Identificadores
@@ -39,6 +44,6 @@ while option != '8':
         found = re.match('', lex)
 
     if found:
-        print('Componente válido')
+        print(f'{GREEN}Componente válido{RESET}')
     else:
-        print('Componente no válido')
+        print(f'{RED}Componente no válido{RESET}')
