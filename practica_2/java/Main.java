@@ -15,18 +15,12 @@ public class Main {
                 6. Operadores relacionales
                 7. Palabras reservadas
                 8. Salir
-
-                """;
+            [1-8]:\s""";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // mainMenu(scanner);
-
-        if (validate(TokenType.Identifier, "-Hola"))
-            System.out.println("Valid");
-        else
-            System.out.println(ConsoleColor.RED + "not valid");
+        mainMenu(scanner);
 
         scanner.close();
     }
@@ -37,11 +31,11 @@ public class Main {
             System.out.print(menu);
             option = s.nextInt();
 
-            System.out.print("Componente léxico: ");
-            String regex = s.nextLine();
-
-            if (option == 8)
+            if (option > 8 || option < 1)
                 return;
+            
+            System.out.print("Componente léxico: ");
+            String regex = s.next();
 
             boolean found;
 
@@ -57,26 +51,36 @@ public class Main {
             }
 
             if (found)
-                System.out.println("Componente válido");
+                System.out.println(ConsoleColor.GREEN + "Componente válido");
             else
                 System.out.println(ConsoleColor.RED + "Componente no válido");
+            System.out.println(ConsoleColor.RESET);
         }
     }
 
     public static boolean validate(TokenType t, String input) {
         String regex;
         switch (t) {
-            case Identifier -> regex = "[a-z][a-z]$";
-            case Integer -> regex = "\\d";
+            case Identifier -> regex = "[a-z]+";
+            case Integer -> regex = "\\d+";
+            case Comment -> regex = ":)";
+            case ArithmeticOperator -> regex = "";
+            case LogicOperator -> regex = "";
+            case RelationalOperator -> regex = "";
+            case Keyword -> regex = "fun|return|none|int|dec|bool|text|if|else|while";
             default -> regex = "";
         }
 
-        if (regex.equals("")) return false;
+        if (t == TokenType.Identifier && Pattern.matches("fun|return|none|int|dec|bool|text|if|else|while", input))
+            return false;
+
+        if (regex.equals(""))
+            return false;
 
         Pattern compiled = Pattern.compile(regex);
 
         Matcher matcher = compiled.matcher(input);
 
-        return matcher.find();
+        return matcher.matches();
     }
 }
