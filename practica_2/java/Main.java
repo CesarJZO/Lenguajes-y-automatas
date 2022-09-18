@@ -63,7 +63,7 @@ public class Main {
         switch (t) {
             case Identifier -> regex = "[a-z]+";
             case Integer -> regex = "\\d+";
-            case Comment -> regex = "";
+            case Comment -> regex = "[:][)]";
             case ArithmeticOperator -> regex = "\\d+[]";
             case LogicOperator -> regex = "";
             case RelationalOperator -> regex = "";

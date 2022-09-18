@@ -1,9 +1,9 @@
 import re
 
-GREEN = '\033[92m'
+GREEN  = '\033[92m'
 YELLOW = '\033[93m'
-RED = '\033[91m'
-RESET = '\033[0m'
+RED    = '\033[91m'
+RESET  = '\033[0m'
 
 menu = """
 Analizador léxico.
@@ -28,20 +28,22 @@ while option != '8':
 
     found = False
 
-    if option == '1':
-        found = re.match('[a-z]+', lex)
-    elif option == '2':
-        found = re.match('', lex)
-    elif option == '3':
-        found = re.match('', lex)
-    elif option == '4':
-        found = re.match('', lex)
-    elif option == '5':
-        found = re.match('', lex)
-    elif option == '6':
-        found = re.match('', lex)
-    elif option == '7':
-        found = re.match('', lex)
+    if option == '1':   # Identifier
+        found = re.match('[a-z]+$', lex)
+    elif option == '2': # Integer
+        found = re.match('\\d+$', lex)
+    elif option == '3': # Comment
+        found = re.match('^[:][)].*', lex)
+    elif option == '4': # Arithmetic Operator
+        found = re.match('^(\\d+[+|-|*|/]\\d+)$', lex)
+    elif option == '5': # Logic Operator
+        found = re.match('^([=]|[&]|[|]|[!])$', lex)
+    elif option == '6': # Relational Operator
+        found = re.match('^([<]|[>])$', lex)
+    elif option == '7': # Keyword
+        found = re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex)
+    if option == '1' and re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex):
+        found = False
 
     if found:
         print(f'{GREEN}Componente válido{RESET}')
