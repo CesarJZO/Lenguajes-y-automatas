@@ -31,7 +31,7 @@ public class Main {
             System.out.print(menu);
             option = s.nextInt();
 
-            if (option > 8 || option < 1)
+            if (option > 7 || option < 1)
                 return;
             
             System.out.print("Componente léxico: ");
@@ -63,8 +63,8 @@ public class Main {
         switch (t) {
             case Identifier -> regex = "[a-z]+";
             case Integer -> regex = "\\d+";
-            case Comment -> regex = ":)";
-            case ArithmeticOperator -> regex = "";
+            case Comment -> regex = "";
+            case ArithmeticOperator -> regex = "\\d+[]";
             case LogicOperator -> regex = "";
             case RelationalOperator -> regex = "";
             case Keyword -> regex = "fun|return|none|int|dec|bool|text|if|else|while";
