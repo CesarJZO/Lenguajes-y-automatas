@@ -1,4 +1,4 @@
-package practica2;
+package practica_2.java;
 
 public enum TokenType {
     Identifier,

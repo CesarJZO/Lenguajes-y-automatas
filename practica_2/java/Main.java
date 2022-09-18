@@ -1,11 +1,10 @@
-package practica2;
+package practica_2.java;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Regex {
-    static Scanner scanner;
+public class Main {
     static String menu = """
             Analizador léxico.
                 1. Identificadores
@@ -20,21 +19,26 @@ public class Regex {
                 """;
 
     public static void main(String[] args) {
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        mainMenu();
+        // mainMenu(scanner);
+
+        if (validate(TokenType.Identifier, "-Hola"))
+            System.out.println("Valid");
+        else
+            System.out.println(ConsoleColor.RED + "not valid");
 
         scanner.close();
     }
 
-    public static void mainMenu() {
+    public static void mainMenu(Scanner s) {
         int option = 0;
         while (option != 8) {
             System.out.print(menu);
-            option = scanner.nextInt();
+            option = s.nextInt();
 
             System.out.print("Componente léxico: ");
-            String regex = scanner.nextLine();
+            String regex = s.nextLine();
 
             if (option == 8)
                 return;
@@ -66,6 +70,8 @@ public class Regex {
             case Integer -> regex = "\\d";
             default -> regex = "";
         }
+
+        if (regex.equals("")) return false;
 
         Pattern compiled = Pattern.compile(regex);
 
