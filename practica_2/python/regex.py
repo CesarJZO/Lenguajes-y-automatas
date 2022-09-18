@@ -22,7 +22,7 @@ option = '1'
 while option != '8':
     option = input(menu)
     
-    if option == '8': exit(1)
+    if option == '8': exit(0)
 
     lex = input('Componente léxico: ')
 
@@ -35,7 +35,7 @@ while option != '8':
     elif option == '3': # Comment
         found = re.match('^[:][)].*', lex)
     elif option == '4': # Arithmetic Operator
-        found = re.match('^(\\d+[+|-|*|/]\\d+)$', lex)
+        found = re.match('^([+|-|*|/])$', lex)
     elif option == '5': # Logic Operator
         found = re.match('^([=]|[&]|[|]|[!])$', lex)
     elif option == '6': # Relational Operator

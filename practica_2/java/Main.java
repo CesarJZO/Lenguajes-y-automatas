@@ -1,5 +1,6 @@
 package practica_2.java;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,8 +30,10 @@ public class Main {
         int option = 0;
         while (option != 8) {
             System.out.print(menu);
-            option = s.nextInt();
-
+            try {
+                option = s.nextInt();
+            } catch (InputMismatchException e) { }
+            
             if (option > 7 || option < 1)
                 return;
             
@@ -63,10 +66,10 @@ public class Main {
         switch (t) {
             case Identifier -> regex = "[a-z]+";
             case Integer -> regex = "\\d+";
-            case Comment -> regex = "[:][)]";
-            case ArithmeticOperator -> regex = "\\d+[]";
-            case LogicOperator -> regex = "";
-            case RelationalOperator -> regex = "";
+            case Comment -> regex = "^[:][)]";
+            case ArithmeticOperator -> regex = "^[-*/+]";
+            case LogicOperator -> regex = "^[=&|!]";
+            case RelationalOperator -> regex = "^[<>]";
             case Keyword -> regex = "fun|return|none|int|dec|bool|text|if|else|while";
             default -> regex = "";
         }
