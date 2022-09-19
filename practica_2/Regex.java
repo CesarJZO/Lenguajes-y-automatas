@@ -25,7 +25,6 @@ public class Regex {
         int option = 1;
         while (option < 8 && option > 0) {
             System.out.print(menu);
-
             try {
                 option = scanner.nextInt();
             } catch (InputMismatchException e) { }
@@ -44,10 +43,10 @@ public class Regex {
                     case 4 -> valid = Pattern.matches("^[-*/+]", lex); // Arithmetic Operator
                     case 5 -> valid = Pattern.matches("^[=&|!]", lex); // Logic Operator
                     case 6 -> valid = Pattern.matches("^[<>]", lex); // Relational Operator
-                    case 7 -> valid = Pattern.matches("fun|return|none|int|dec|bool|text|if|else|while", lex); // Keyword
+                    case 7 -> valid = Pattern.matches("fun|return|num|txt|bool", lex); // Keyword
                     default -> valid = false;
                 }
-                if (option == 1 && Pattern.matches("fun|return|none|int|dec|bool|text|if|else|while", lex)) valid = false;
+                if (option == 1 && Pattern.matches("fun|return|num|txt|bool", lex)) valid = false;
 
                 if (valid)
                     System.out.println(GREEN + "Componente válido");

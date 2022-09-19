@@ -41,8 +41,8 @@ while option != '8':
     elif option == '6': # Relational Operator
         valid = re.match('^([<]|[>])$', lex)
     elif option == '7': # Keyword
-        valid = re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex)
-    if option == '1' and re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex):
+        valid = re.match('^(fun|return|num|txt|bool)$', lex)
+    if option == '1' and re.match('^(fun|return|num|txt|bool)$', lex):
         valid = False
 
     if valid:
