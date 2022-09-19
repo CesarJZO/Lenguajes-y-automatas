@@ -46,6 +46,6 @@ while option != '8':
         valid = False
 
     if valid:
-        print(f'{GREEN}Componente válido{RESET}')
+        print(f'{GREEN}Cadena válida{RESET}')
     else:
-        print(f'{RED}Componente no válido{RESET}')
+        print(f'{RED}Cadena no válida{RESET}')

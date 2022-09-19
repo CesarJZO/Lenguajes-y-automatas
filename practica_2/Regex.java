@@ -49,9 +49,9 @@ public class Regex {
                 if (option == 1 && Pattern.matches("fun|return|num|txt|bool", lex)) valid = false;
 
                 if (valid)
-                    System.out.println(GREEN + "Componente válido");
+                    System.out.println(GREEN + "Cadena válida");
                 else
-                    System.out.println(RED + "Componente no válido");
+                    System.out.println(RED + "Cadena no válido");
                 System.out.println(RESET);
             }
         }
