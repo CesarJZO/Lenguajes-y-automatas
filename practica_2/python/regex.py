@@ -26,26 +26,26 @@ while option != '8':
 
     lex = input('Componente léxico: ')
 
-    found = False
+    valid = False
 
     if option == '1':   # Identifier
-        found = re.match('[a-z]+$', lex)
+        valid = re.match('[a-z]+$', lex)
     elif option == '2': # Integer
-        found = re.match('\\d+$', lex)
+        valid = re.match('\\d+$', lex)
     elif option == '3': # Comment
-        found = re.match('^[:][)].*', lex)
+        valid = re.match('^[:][)].*', lex)
     elif option == '4': # Arithmetic Operator
-        found = re.match('^([+|-|*|/])$', lex)
+        valid = re.match('^([+|-|*|/])$', lex)
     elif option == '5': # Logic Operator
-        found = re.match('^([=]|[&]|[|]|[!])$', lex)
+        valid = re.match('^([=]|[&]|[|]|[!])$', lex)
     elif option == '6': # Relational Operator
-        found = re.match('^([<]|[>])$', lex)
+        valid = re.match('^([<]|[>])$', lex)
     elif option == '7': # Keyword
-        found = re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex)
+        valid = re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex)
     if option == '1' and re.match('^(fun|return|none|int|dec|bool|text|if|else|while)$', lex):
-        found = False
+        valid = False
 
-    if found:
+    if valid:
         print(f'{GREEN}Componente válido{RESET}')
     else:
         print(f'{RED}Componente no válido{RESET}')
