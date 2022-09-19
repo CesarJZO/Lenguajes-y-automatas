@@ -1,4 +1,4 @@
-package practica_2.java;
+package practica_2;
 
 import java.util.*;
 import java.util.regex.*;
@@ -22,15 +22,15 @@ public class Regex {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int option = 0;
-        while (option != 8) {
+        int option = 1;
+        while (option < 8 && option > 0) {
             System.out.print(menu);
 
             try {
                 option = scanner.nextInt();
             } catch (InputMismatchException e) { }
 
-            if (option != 8) {
+            if (option < 8 && option > 0) {
 
                 System.out.print("Componente léxico: ");
                 String lex = scanner.next();
