@@ -24,7 +24,7 @@ while option != '8':
     
     if option == '8': exit(0)
 
-    lex = input('Componente léxico: ')
+    lex = input('Cadena: ')
 
     valid = False
 
