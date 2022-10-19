@@ -1,1 +1,2 @@
-&hola_1 + &hola_2
+ifwhile
+else + then == begin
