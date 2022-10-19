@@ -45,45 +45,46 @@ void printRow(int token, char *lexeme);
 /* Rule section */
 %%
 
-"&"[a-zA-Z]+"_"{1}[0-9]+ { return printRow(IDENTIFIER, yytext); }
+"&"[a-zA-Z]+"_"{1}[0-9]+ { printRow(IDENTIFIER, yytext); }
 
-"-" 	{ return printRow(SUBTRACT_OP, yytext); }
-"+"	    { return printRow(ADDITION_OP, yytext); }
-"/"	    { return printRow(DIVISION_OP, yytext); }
-"*"	    { return printRow(MULTIPLY_OP, yytext); }
+"-" 	{ printRow(SUBTRACT_OP, yytext); }
+"+"	    { printRow(ADDITION_OP, yytext); }
+"/"	    { printRow(DIVISION_OP, yytext); }
+"*"	    { printRow(MULTIPLY_OP, yytext); }
 
-"<"	    { return printRow(SMALLER_THAN, yytext); }
-">"	    { return printRow(GREATER_THAN, yytext); }
-"<="	{ return printRow(LESS_EQUAL, yytext); 	 }
-">="	{ return printRow(MORE_EQUAL, yytext); 	 }
-"=="	{ return printRow(COMPARISON, yytext); 	 }
+"<"	    { printRow(SMALLER_THAN, yytext); }
+">"	    { printRow(GREATER_THAN, yytext); }
+"<="	{ printRow(LESS_EQUAL, yytext); 	 }
+">="	{ printRow(MORE_EQUAL, yytext); 	 }
+"=="	{ printRow(COMPARISON, yytext); 	 }
 
-"&"	{ return printRow(AND_OP, yytext); }
-"|"	{ return printRow(OR_OP, yytext);  }
-"~"	{ return printRow(NOT_OP, yytext); }
+"&"	{ printRow(AND_OP, yytext); }
+"|"	{ printRow(OR_OP, yytext);  }
+"~"	{ printRow(NOT_OP, yytext); }
 
-"program"       { return printRow(PROGRAM_KEYWORD, yytext); }
-"begin" 	    { return printRow(BEGIN_KEYWORD, yytext);   }
-"end"           { return printRow(END_KEYWORD, yytext);     }
-"input"         { return printRow(INPUT_KEYWORD, yytext);   }
-"output"        { return printRow(OUTPUT_KEYWORD, yytext);  }
-"integer"       { return printRow(INTEGER_KEYWORD, yytext); }
-"real"          { return printRow(REAL_KEYWORD, yytext);    }
-"char"          { return printRow(CHAR_KEYWORD, yytext);    }
-"string"        { return printRow(STRING_KEYWORD, yytext);  }
-"boolean"       { return printRow(BOOLEAN_KEYWORD, yytext); }
-"if"            { return printRow(IF_KEYWORD, yytext);      }
-"else"          { return printRow(ELSE_KEYWORD, yytext);    }
-"then"          { return printRow(THEN_KEYWORD, yytext);    }
-"while"         { return printRow(WHILE_KEYWORD, yytext);   }
-"do"            { return printRow(DO_KEYWORD, yytext);      }
-"repeat"        { return printRow(REPEAT_KEYWORD, yytext);  }
-"until"         { return printRow(UNTIL_KEYWORD, yytext);   }
-"var"           { return printRow(VAR_KEYWORD, yytext);     }
-"true"          { return printRow(TRUE_KEYWORD, yytext);    }
-"false"         { return printRow(FALSE_KEYWORD, yytext);   }
+"program"       { printRow(PROGRAM_KEYWORD, yytext); }
+"begin" 	    { printRow(BEGIN_KEYWORD, yytext);   }
+"end"           { printRow(END_KEYWORD, yytext);     }
+"input"         { printRow(INPUT_KEYWORD, yytext);   }
+"output"        { printRow(OUTPUT_KEYWORD, yytext);  }
+"integer"       { printRow(INTEGER_KEYWORD, yytext); }
+"real"          { printRow(REAL_KEYWORD, yytext);    }
+"char"          { printRow(CHAR_KEYWORD, yytext);    }
+"string"        { printRow(STRING_KEYWORD, yytext);  }
+"boolean"       { printRow(BOOLEAN_KEYWORD, yytext); }
+"if"            { printRow(IF_KEYWORD, yytext);      }
+"else"          { printRow(ELSE_KEYWORD, yytext);    }
+"then"          { printRow(THEN_KEYWORD, yytext);    }
+"while"         { printRow(WHILE_KEYWORD, yytext);   }
+"do"            { printRow(DO_KEYWORD, yytext);      }
+"repeat"        { printRow(REPEAT_KEYWORD, yytext);  }
+"until"         { printRow(UNTIL_KEYWORD, yytext);   }
+"var"           { printRow(VAR_KEYWORD, yytext);     }
+"true"          { printRow(TRUE_KEYWORD, yytext);    }
+"false"         { printRow(FALSE_KEYWORD, yytext);   }
 
-\n    { lines++; }
+\n      { lines++; }
+[ \t\r] /* no action: ignore all white space */
 
 %%
 
@@ -99,6 +100,11 @@ int yywrap() { }
 
 int main(int length, char **args)
 {
+    if (length == 1)
+    {
+        printf("You need to provide a file to be read");
+        return 1;
+    }
     FILE *fp;
     fp = fopen(args[1], "r");
     yyin = fp;
@@ -109,4 +115,5 @@ int main(int length, char **args)
     );
 
     int token = yylex();
+    return 0;
 }

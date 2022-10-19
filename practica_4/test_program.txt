@@ -1,2 +1,3 @@
-ifwhile
+if while thenbegin
 else + then == begin
+> < & | ~
