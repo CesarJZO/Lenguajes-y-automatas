@@ -1,3 +1,8 @@
-if while thenbegin
-else + then == begin
-> < & | ~
+program begin
+    integer &result1 = (&var0 - &Var_1) / 15
+
+    if (&result1 > 0 & &var0==5) then
+        output -512
+    else
+        //nothing!//
+end
