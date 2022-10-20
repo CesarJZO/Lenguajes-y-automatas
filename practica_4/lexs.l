@@ -68,52 +68,52 @@ void printRow(char *token, char *lexeme);
 
 "&"[a-zA-Z]+"_"{0,1}[0-9]* { printRow("Identifier", yytext); }
 
-"-"             { printRow("Subtraction",       yytext); }
-"+"             { printRow("Addition",       yytext); }
-"/"             { printRow("Division",       yytext); }
-"*"             { printRow("Multiplication",       yytext); }
+"-"             { printRow("subtraction",       yytext); }
+"+"             { printRow("addition",          yytext); }
+"/"             { printRow("division",          yytext); }
+"*"             { printRow("multiplication",    yytext); }
 
-"<"             { printRow("Less than",      yytext); }
-">"             { printRow("Greater than",      yytext); }
-"<="            { printRow("Less equal",        yytext); }
-">="            { printRow("Greater equal",        yytext); }
-"=="            { printRow("Comparison",        yytext); }
+"<"             { printRow("less than",         yytext); }
+">"             { printRow("greater than",      yytext); }
+"<="            { printRow("less equal",        yytext); }
+">="            { printRow("greater equal",     yytext); }
+"=="            { printRow("comparison",        yytext); }
 
-"&"             { printRow("And",            yytext); }
-"|"             { printRow("Or",             yytext); }
-"~"             { printRow("Not",            yytext); }
+"&"             { printRow("and",               yytext); }
+"|"             { printRow("or",                yytext); }
+"~"             { printRow("not",               yytext); }
 
-"program"       { printRow("Keyword",   yytext); }
-"begin"         { printRow("Keyword",     yytext); }
-"end"           { printRow("Keyword",       yytext); }
-"input"         { printRow("Keyword",     yytext); }
-"output"        { printRow("Keyword",    yytext); }
-"integer"       { printRow("Keyword",   yytext); }
-"real"          { printRow("Keyword",      yytext); }
-"char"          { printRow("Keyword",      yytext); }
-"string"        { printRow("Keyword",    yytext); }
-"boolean"       { printRow("Keyword",   yytext); }
-"if"            { printRow("Keyword",        yytext); }
-"else"          { printRow("Keyword",      yytext); }
-"then"          { printRow("Keyword",      yytext); }
-"while"         { printRow("Keyword",     yytext); }
-"do"            { printRow("Keyword",        yytext); }
-"repeat"        { printRow("Keyword",    yytext); }
-"until"         { printRow("Keyword",     yytext); }
-"var"           { printRow("Keyword",       yytext); }
-"true"          { printRow("Keyword",      yytext); }
-"false"         { printRow("Keyword",     yytext); }
+"program"       { printRow("keyword",           yytext); }
+"begin"         { printRow("keyword",           yytext); }
+"end"           { printRow("keyword",           yytext); }
+"input"         { printRow("keyword",           yytext); }
+"output"        { printRow("keyword",           yytext); }
+"integer"       { printRow("keyword",           yytext); }
+"real"          { printRow("keyword",           yytext); }
+"char"          { printRow("keyword",           yytext); }
+"string"        { printRow("keyword",           yytext); }
+"boolean"       { printRow("keyword",           yytext); }
+"if"            { printRow("keyword",           yytext); }
+"else"          { printRow("keyword",           yytext); }
+"then"          { printRow("keyword",           yytext); }
+"while"         { printRow("keyword",           yytext); }
+"do"            { printRow("keyword",           yytext); }
+"repeat"        { printRow("keyword",           yytext); }
+"until"         { printRow("keyword",           yytext); }
+"var"           { printRow("keyword",           yytext); }
+"true"          { printRow("keyword",           yytext); }
+"false"         { printRow("keyword",           yytext); }
 
-"("             { printRow("Open parenthesis",  yytext); }
-")"             { printRow("Close parenthesis", yytext); }
-";"             { printRow("Semicolon",         yytext); }
-","             { printRow("Comma",             yytext); }
-":"             { printRow("Colon",             yytext); }
-"="             { printRow("Equals",            yytext); }
+"("             { printRow("open parenthesis",  yytext); }
+")"             { printRow("close parenthesis", yytext); }
+";"             { printRow("semicolon",         yytext); }
+","             { printRow("comma",             yytext); }
+":"             { printRow("colon",             yytext); }
+"="             { printRow("equals",            yytext); }
 
-"//"([.|" "])+"//" { printRow("Comment", yytext); }
+"//".+"//"      { printRow("comment",           yytext); }
 
-[0-9]+          { printRow("Integer", yytext); }
+[0-9]+          { printRow("integer",           yytext); }
 
 \n              { lines++; }
 

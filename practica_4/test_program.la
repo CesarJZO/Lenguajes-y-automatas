@@ -4,5 +4,5 @@ program begin
     if (&result1>= 0 & &var0==5) then
         output -512
     else
-        // <>holaComment!!?//
+        // <comment!?//
 end
