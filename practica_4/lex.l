@@ -102,7 +102,7 @@ int main(int length, char **args)
 {
     if (length == 1)
     {
-        printf("You need to provide a file to be read");
+        printf("You need to provide a file to be read\n");
         return 1;
     }
     FILE *fp;
@@ -111,7 +111,7 @@ int main(int length, char **args)
 
     printf(
         "| Occurrence | Token | Lexeme         | Line |\n"
-        "+------------+-------+----------------+------+\n"
+        "|------------|-------|----------------|------|\n"
     );
 
     int token = yylex();

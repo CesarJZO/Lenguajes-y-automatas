@@ -2,3 +2,4 @@
 tests/
 *.exe
 *.out
+**/bin/
