@@ -23,3 +23,9 @@ O bien, todos al mismo tiempo
 ```bash
 flex -o lex.c lex.l; gcc -o ./bin/lex lex.c; ./bin/lex test_program.la
 ```
+
+En caso de usar el programa que muestra los tokens con por su nombre, se compila el archivo `lexs.l`
+
+```bash
+flex -o lexs.c lexs.l; gcc -o ./bin/lexs lexs.c; ./bin/lexs test_program.la
+```
