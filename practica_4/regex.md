@@ -7,7 +7,7 @@
 Inicia con & seguida de una letra y puede contener más letras y/o guion bajo y/ o números
 
 ```c
-"&"[a-Z]+"_"*[0-9]*
+"&"[a-zA-Z]+"_"{0,1}[0-9]*
 ```
 
 ### Operadores aritméticos
@@ -68,7 +68,7 @@ Inicia con & seguida de una letra y puede contener más letras y/o guion bajo y/
 Inician y terminan con `//` y pueden contener cualquier otro carácter o estar vacío separado al menos de un espacio
 
 ```c
-"//"(.|" ")+"//"
+"//".+"//"
 ```
 
 ### Números enteros
@@ -76,7 +76,7 @@ Inician y terminan con `//` y pueden contener cualquier otro carácter o estar v
 Cualquier cantidad entera que no incluya negativos
 
 ```c
-^"-"[0-9]+
+[0-9]+
 ```
 
 ### Caracteres especiales que no generan token

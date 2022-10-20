@@ -111,7 +111,7 @@ void printRow(int token, char *lexeme);
 ":"             { printRow(COLON,             yytext); }
 "="             { printRow(EQUALS,            yytext); }
 
-"//"([.|" "])+"//" { printRow(COMMENT, yytext); }
+"//".+"//"      { printRow(COMMENT, yytext); }
 
 [0-9]+          { printRow(INTEGER, yytext); }
 
