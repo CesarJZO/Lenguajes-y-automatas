@@ -10,19 +10,19 @@ int errorOccurrences = 1;
 void writeErrorRow(char *lexeme, char *desc);
 void printRow(int token, char *lexeme, int color);
 
-#define ANSI_RED               "\x1b[31m"
-#define ANSI_GREEN             "\x1b[32m"
-#define ANSI_MAGENTA           "\x1b[35m"
-#define ANSI_RESET             "\x1b[0m"
+#define ANSI_RED          "\x1b[31m"
+#define ANSI_GREEN        "\x1b[32m"
+#define ANSI_MAGENTA      "\x1b[35m"
+#define ANSI_RESET        "\x1b[0m"
 
-#define GRAY    2
-#define RED     31
-#define GREEN   32
-#define YELLOW  33
-#define BLUE    34
-#define MAGENTA 35
-#define CYAN    36
-#define AUTO    0
+#define GRAY              2
+#define RED               31
+#define GREEN             32
+#define YELLOW            33
+#define BLUE              34
+#define MAGENTA           35
+#define CYAN              36
+#define AUTO              0
 
 #define IDENTIFIER        1
 
