@@ -102,6 +102,7 @@ Cualquier cantidad entera que no incluya negativos
 ## Tabla de errores
 
 ```md
+|--------------------------Errors--------------------------|
 | Occurrence | Lexeme         | Description         | Line |
 |------------|----------------|---------------------|------|
 | 1          | 14             | Word not recognized | 1    |

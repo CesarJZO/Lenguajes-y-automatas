@@ -4,6 +4,9 @@
 int occurrences = 1;
 int lines = 1;
 
+FILE *ep;
+
+void writeErrorRow(char *token);
 void printRow(int token, char *lexeme);
 
 #define RED               "\x1b[31m"
@@ -112,15 +115,22 @@ void printRow(int token, char *lexeme);
 ":"             { printRow(COLON,             yytext); }
 "="             { printRow(EQUALS,            yytext); }
 
-"//".+"//"      { printRow(COMMENT, yytext); }
+"//".+"//"      { printRow(COMMENT,           yytext); }
 
-[0-9]+          { printRow(INTEGER, yytext); }
+[0-9]+          { printRow(INTEGER,           yytext); }
 
 \n              { lines++; }
 
-. { printf(RED "Error: " MAGENTA "%s" RESET " is not a valid token\n", yytext); }
+.               { writeErrorRow(yytext); }
 
 %%
+
+void writeErrorRow(char *token)
+{
+    fputs("| ", ep);
+    fputs(token, ep);
+    fputs("", ep);
+}
 
 void printRow(int token, char *lexeme)
 {
@@ -130,13 +140,24 @@ void printRow(int token, char *lexeme)
     occurrences++;
 }
 
+void printErrorTable()
+{
+    printf(
+        "|--------------------------Errors--------------------------|\n"
+        "| Occurrence | Lexeme         | Description         | Line |\n"
+        "|------------|----------------|---------------------|------|\n"
+    );
+
+    for
+}
+
 int yywrap() { }
 
 int main(int length, char **args)
 {
     if (length == 1)
     {
-        printf(RED "Error: " RESET "You need to provide a file to be read\n");
+        perror(RED "Error: " RESET "You need to provide a file to be read\n");
         return 1;
     }
 
@@ -144,12 +165,17 @@ int main(int length, char **args)
     fp = fopen(args[1], "r");
     yyin = fp;
 
+    ep = fopen("./errors.tmp", "w");
+
     printf(
         "| Occurrence | Token | Lexeme         | Line |\n"
         "|------------|-------|----------------|------|\n"
     );
 
     yylex();
+
+    fclose(ep);
+    remove("./errors.tmp");
 
     printf("\n");
 
