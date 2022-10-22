@@ -78,7 +78,7 @@ void writeErrorRow(char *lexeme, char *desc);
 
 [ \t\r] /* no action: ignore all white space */
 
-"&"[a-zA-Z]+"_"{0,1}[0-9]* { printRow("identifier", yytext, AUTO); }
+"&"[a-zA-Z]+"_"{0,1}[0-9]* { printRow("identifier", yytext, GREEN); }
 
 "-"             { printRow("subtraction",       yytext,    CYAN); }
 "+"             { printRow("addition",          yytext,    CYAN); }
@@ -157,7 +157,7 @@ int main(int length, char **args)
 {
     if (length == 1)
     {
-        perror(ANSI_RED "Error: " ANSI_RESET "You need to provide a file to be read\n");
+        printf(ANSI_RED "Error: " ANSI_RESET "You need to provide a file to be read\n");
         return 1;
     }
 
