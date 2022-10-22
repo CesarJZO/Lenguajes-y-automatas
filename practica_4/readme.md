@@ -1,5 +1,11 @@
 # Práctica 4: Análisis léxico
 
+Primero hay que preparar las carpetas necesarias para almacenar los códigos generados y los ejecutables
+
+```bash
+mkdir c bin
+```
+
 Para compilar el código hay que convertir el archivo lex (`.l`) a lenguaje C (`.c`), especificando que se llame `lex.c` en este caso
 
 ```bash
