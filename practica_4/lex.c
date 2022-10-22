@@ -526,12 +526,21 @@ FILE *ep;
 int errorOccurrences = 1;
 
 void writeErrorRow(char *lexeme, char *desc);
-void printRow(int token, char *lexeme);
+void printRow(int token, char *lexeme, int color);
 
-#define RED               "\x1b[31m"
-#define GREEN             "\x1b[32m"
-#define MAGENTA           "\x1b[35m"
-#define RESET             "\x1b[0m"
+#define ANSI_RED               "\x1b[31m"
+#define ANSI_GREEN             "\x1b[32m"
+#define ANSI_MAGENTA           "\x1b[35m"
+#define ANSI_RESET             "\x1b[0m"
+
+#define GRAY    2
+#define RED     31
+#define GREEN   32
+#define YELLOW  33
+#define BLUE    34
+#define MAGENTA 35
+#define CYAN    36
+#define AUTO    0
 
 #define IDENTIFIER        1
 
@@ -582,9 +591,9 @@ void printRow(int token, char *lexeme);
 
 #define INTEGER           41
 
-#line 586 "lex.c"
+#line 595 "lex.c"
 /* Rule section */
-#line 588 "lex.c"
+#line 597 "lex.c"
 
 #define INITIAL 0
 
@@ -801,10 +810,10 @@ YY_DECL
 		}
 
 	{
-#line 70 "lex.l"
+#line 79 "lex.l"
 
 
-#line 808 "lex.c"
+#line 817 "lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -863,231 +872,231 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 72 "lex.l"
+#line 81 "lex.l"
 /* no action: ignore all white space */
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 74 "lex.l"
-{ printRow(IDENTIFIER, yytext); }
+#line 83 "lex.l"
+{ printRow(IDENTIFIER, yytext, RED); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 76 "lex.l"
-{ printRow(SUBTRACT_OP,       yytext); }
+#line 85 "lex.l"
+{ printRow(SUBTRACT_OP,       yytext, CYAN); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 77 "lex.l"
-{ printRow(ADDITION_OP,       yytext); }
+#line 86 "lex.l"
+{ printRow(ADDITION_OP,       yytext, CYAN); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 78 "lex.l"
-{ printRow(DIVISION_OP,       yytext); }
+#line 87 "lex.l"
+{ printRow(DIVISION_OP,       yytext, CYAN); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 79 "lex.l"
-{ printRow(MULTIPLY_OP,       yytext); }
+#line 88 "lex.l"
+{ printRow(MULTIPLY_OP,       yytext, CYAN); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 81 "lex.l"
-{ printRow(SMALLER_THAN,      yytext); }
+#line 90 "lex.l"
+{ printRow(SMALLER_THAN,      yytext, BLUE); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 82 "lex.l"
-{ printRow(GREATER_THAN,      yytext); }
+#line 91 "lex.l"
+{ printRow(GREATER_THAN,      yytext, BLUE); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 83 "lex.l"
-{ printRow(LESS_EQUAL,        yytext); }
+#line 92 "lex.l"
+{ printRow(LESS_EQUAL,        yytext, BLUE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 84 "lex.l"
-{ printRow(MORE_EQUAL,        yytext); }
+#line 93 "lex.l"
+{ printRow(MORE_EQUAL,        yytext, BLUE); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 85 "lex.l"
-{ printRow(COMPARISON,        yytext); }
+#line 94 "lex.l"
+{ printRow(COMPARISON,        yytext, BLUE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 87 "lex.l"
-{ printRow(AND_OP,            yytext); }
+#line 96 "lex.l"
+{ printRow(AND_OP,            yytext, BLUE); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 88 "lex.l"
-{ printRow(OR_OP,             yytext); }
+#line 97 "lex.l"
+{ printRow(OR_OP,             yytext, BLUE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 89 "lex.l"
-{ printRow(NOT_OP,            yytext); }
+#line 98 "lex.l"
+{ printRow(NOT_OP,            yytext, BLUE); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 91 "lex.l"
-{ printRow(PROGRAM_KEYWORD,   yytext); }
+#line 100 "lex.l"
+{ printRow(PROGRAM_KEYWORD,   yytext, MAGENTA); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 92 "lex.l"
-{ printRow(BEGIN_KEYWORD,     yytext); }
+#line 101 "lex.l"
+{ printRow(BEGIN_KEYWORD,     yytext, MAGENTA); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 93 "lex.l"
-{ printRow(END_KEYWORD,       yytext); }
+#line 102 "lex.l"
+{ printRow(END_KEYWORD,       yytext, MAGENTA); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 94 "lex.l"
-{ printRow(INPUT_KEYWORD,     yytext); }
+#line 103 "lex.l"
+{ printRow(INPUT_KEYWORD,     yytext, MAGENTA); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 95 "lex.l"
-{ printRow(OUTPUT_KEYWORD,    yytext); }
+#line 104 "lex.l"
+{ printRow(OUTPUT_KEYWORD,    yytext, MAGENTA); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 96 "lex.l"
-{ printRow(INTEGER_KEYWORD,   yytext); }
+#line 105 "lex.l"
+{ printRow(INTEGER_KEYWORD,   yytext, MAGENTA); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 97 "lex.l"
-{ printRow(REAL_KEYWORD,      yytext); }
+#line 106 "lex.l"
+{ printRow(REAL_KEYWORD,      yytext, MAGENTA); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 98 "lex.l"
-{ printRow(CHAR_KEYWORD,      yytext); }
+#line 107 "lex.l"
+{ printRow(CHAR_KEYWORD,      yytext, MAGENTA); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 99 "lex.l"
-{ printRow(STRING_KEYWORD,    yytext); }
+#line 108 "lex.l"
+{ printRow(STRING_KEYWORD,    yytext, MAGENTA); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 100 "lex.l"
-{ printRow(BOOLEAN_KEYWORD,   yytext); }
+#line 109 "lex.l"
+{ printRow(BOOLEAN_KEYWORD,   yytext, MAGENTA); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 101 "lex.l"
-{ printRow(IF_KEYWORD,        yytext); }
+#line 110 "lex.l"
+{ printRow(IF_KEYWORD,        yytext, MAGENTA); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 102 "lex.l"
-{ printRow(ELSE_KEYWORD,      yytext); }
+#line 111 "lex.l"
+{ printRow(ELSE_KEYWORD,      yytext, MAGENTA); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 103 "lex.l"
-{ printRow(THEN_KEYWORD,      yytext); }
+#line 112 "lex.l"
+{ printRow(THEN_KEYWORD,      yytext, MAGENTA); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 104 "lex.l"
-{ printRow(WHILE_KEYWORD,     yytext); }
+#line 113 "lex.l"
+{ printRow(WHILE_KEYWORD,     yytext, MAGENTA); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 105 "lex.l"
-{ printRow(DO_KEYWORD,        yytext); }
+#line 114 "lex.l"
+{ printRow(DO_KEYWORD,        yytext, MAGENTA); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 106 "lex.l"
-{ printRow(REPEAT_KEYWORD,    yytext); }
+#line 115 "lex.l"
+{ printRow(REPEAT_KEYWORD,    yytext, MAGENTA); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 107 "lex.l"
-{ printRow(UNTIL_KEYWORD,     yytext); }
+#line 116 "lex.l"
+{ printRow(UNTIL_KEYWORD,     yytext, MAGENTA); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 108 "lex.l"
-{ printRow(VAR_KEYWORD,       yytext); }
+#line 117 "lex.l"
+{ printRow(VAR_KEYWORD,       yytext, MAGENTA); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 109 "lex.l"
-{ printRow(TRUE_KEYWORD,      yytext); }
+#line 118 "lex.l"
+{ printRow(TRUE_KEYWORD,      yytext, MAGENTA); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 110 "lex.l"
-{ printRow(FALSE_KEYWORD,     yytext); }
+#line 119 "lex.l"
+{ printRow(FALSE_KEYWORD,     yytext, MAGENTA); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 112 "lex.l"
-{ printRow(OPEN_PARENTHESIS,  yytext); }
+#line 121 "lex.l"
+{ printRow(OPEN_PARENTHESIS,  yytext, AUTO); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 113 "lex.l"
-{ printRow(CLOSE_PARENTHESIS, yytext); }
+#line 122 "lex.l"
+{ printRow(CLOSE_PARENTHESIS, yytext, AUTO); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 114 "lex.l"
-{ printRow(SEMICOLON,         yytext); }
+#line 123 "lex.l"
+{ printRow(SEMICOLON,         yytext, AUTO); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 115 "lex.l"
-{ printRow(COMMA,             yytext); }
+#line 124 "lex.l"
+{ printRow(COMMA,             yytext, AUTO); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 116 "lex.l"
-{ printRow(COLON,             yytext); }
+#line 125 "lex.l"
+{ printRow(COLON,             yytext, AUTO); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 117 "lex.l"
-{ printRow(EQUALS,            yytext); }
+#line 126 "lex.l"
+{ printRow(EQUALS,            yytext, AUTO); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 119 "lex.l"
-{ printRow(COMMENT,           yytext); }
+#line 128 "lex.l"
+{ printRow(COMMENT,           yytext, GRAY); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 121 "lex.l"
-{ printRow(INTEGER,           yytext); }
+#line 130 "lex.l"
+{ printRow(INTEGER,           yytext, YELLOW); }
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 123 "lex.l"
+#line 132 "lex.l"
 { lines++; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 125 "lex.l"
+#line 134 "lex.l"
 { writeErrorRow(yytext, "Unexpected token"); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 127 "lex.l"
+#line 136 "lex.l"
 ECHO;
 	YY_BREAK
-#line 1091 "lex.c"
+#line 1100 "lex.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2092,23 +2101,23 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 127 "lex.l"
+#line 136 "lex.l"
 
 
 void writeErrorRow(char *lexeme, char *description)
 {
     fprintf(ep,
-        "| %-11d| %-15s| %-20s| %-5d|\n",
+        "| %-11d|" ANSI_RED " %-15s" ANSI_RESET "| %-20s| %-5d|\n",
         errorOccurrences, lexeme, description, lines
     );
     errorOccurrences++;
 }
 
-void printRow(int token, char *lexeme)
+void printRow(int token, char *lexeme, int color)
 {
     printf(
-        "| %-11d| %-6d| %-15s| %-5d|\n",
-        occurrences, token, lexeme, lines
+        "| %-11d| %-6d|\x1b[%dm %-29s" ANSI_RESET "| %-5d|\n",
+        occurrences, token, color, lexeme, lines
     );
     occurrences++;
 }
@@ -2119,7 +2128,7 @@ int main(int length, char **args)
 {
     if (length == 1)
     {
-        perror(RED "Error: " RESET "You need to provide a file to be read\n");
+        perror(ANSI_RED "Error: " ANSI_RESET "You need to provide a file to be read\n");
         return 1;
     }
 
@@ -2128,9 +2137,9 @@ int main(int length, char **args)
     yyin = fp;
 
     printf(
-        "|-------------------Tokens-------------------|\n"
-        "| Occurrence | Token | Lexeme         | Line |\n"
-        "|------------|-------|----------------|------|\n"
+        "|--------------------------Tokens--------------------------|\n"
+        "| Occurrence | Token | Lexeme                       | Line |\n"
+        "|------------|-------|------------------------------|------|\n"
     );
 
     ep = fopen("./errors.tmp", "w");
