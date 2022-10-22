@@ -1,6 +1,6 @@
-#line 2 "lexs.c"
+#line 2 "./c/lexs.c"
 
-#line 4 "lexs.c"
+#line 4 "./c/lexs.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -589,9 +589,9 @@ void writeErrorRow(char *lexeme, char *desc);
 
 #define INTEGER           41
 
-#line 593 "lexs.c"
+#line 593 "./c/lexs.c"
 /* Rule section */
-#line 595 "lexs.c"
+#line 595 "./c/lexs.c"
 
 #define INITIAL 0
 
@@ -811,7 +811,7 @@ YY_DECL
 #line 77 "lexs.l"
 
 
-#line 815 "lexs.c"
+#line 815 "./c/lexs.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1094,7 +1094,7 @@ YY_RULE_SETUP
 #line 134 "lexs.l"
 ECHO;
 	YY_BREAK
-#line 1098 "lexs.c"
+#line 1098 "./c/lexs.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
