@@ -8,6 +8,7 @@ void printRow(int token, char *lexeme);
 
 #define RED               "\x1b[31m"
 #define GREEN             "\x1b[32m"
+#define MAGENTA           "\x1b[35m"
 #define RESET             "\x1b[0m"
 
 #define IDENTIFIER        1
@@ -116,6 +117,8 @@ void printRow(int token, char *lexeme);
 [0-9]+          { printRow(INTEGER, yytext); }
 
 \n              { lines++; }
+
+. { printf(RED "Error: " MAGENTA "%s" RESET " is not a valid token\n", yytext); }
 
 %%
 

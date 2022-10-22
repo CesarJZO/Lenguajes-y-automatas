@@ -86,3 +86,27 @@ Cualquier cantidad entera que no incluya negativos
 - `\t` Tabulación
 - `\n` Final de línea
 - `\f` Final de archivo
+
+## Tabla de tokens
+
+```md
+| Occurrence | Token | Lexeme         | Line |
+|------------|-------|----------------|------|
+| 1          | 14    | program        | 1    |
+| 2          | 19    | integer        | 2    |
+| 3          | 1     | &result1       | 2    |
+| 4          | 39    | =              | 2    |
+| 5          | 34    | (              | 2    |
+```
+
+## Tabla de errores
+
+```md
+| Occurrence | Lexeme         | Description         | Line |
+|------------|----------------|---------------------|------|
+| 1          | 14             | Word not recognized | 1    |
+| 2          | 19             | integer             | 2    |
+| 3          | 1              | &result1            | 2    |
+| 4          | 39             | =                   | 2    |
+| 5          | 34             | (                   | 2    |
+```
