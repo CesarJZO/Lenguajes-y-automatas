@@ -5,8 +5,9 @@ int occurrences = 1;
 int lines = 1;
 
 FILE *ep;
+int errorOccurrences = 1;
 
-void writeErrorRow(char *token);
+void writeErrorRow(char *lexeme, char *desc);
 void printRow(int token, char *lexeme);
 
 #define RED               "\x1b[31m"
@@ -121,34 +122,26 @@ void printRow(int token, char *lexeme);
 
 \n              { lines++; }
 
-.               { writeErrorRow(yytext); }
+.               { writeErrorRow(yytext, "Unexpected token"); }
 
 %%
 
-void writeErrorRow(char *token)
+void writeErrorRow(char *lexeme, char *description)
 {
-    fputs("| ", ep);
-    fputs(token, ep);
-    fputs("", ep);
+    fprintf(ep,
+        "| %-11d| %-15s| %-20s| %-5d|\n",
+        errorOccurrences, lexeme, description, lines
+    );
+    errorOccurrences++;
 }
 
 void printRow(int token, char *lexeme)
 {
     printf(
-        "| %-11d| %-6d| %-15s| %-5d|\n", occurrences, token, lexeme, lines
+        "| %-11d| %-6d| %-15s| %-5d|\n",
+        occurrences, token, lexeme, lines
     );
     occurrences++;
-}
-
-void printErrorTable()
-{
-    printf(
-        "|--------------------------Errors--------------------------|\n"
-        "| Occurrence | Lexeme         | Description         | Line |\n"
-        "|------------|----------------|---------------------|------|\n"
-    );
-
-    for
 }
 
 int yywrap() { }
@@ -165,18 +158,32 @@ int main(int length, char **args)
     fp = fopen(args[1], "r");
     yyin = fp;
 
-    ep = fopen("./errors.tmp", "w");
-
     printf(
+        "|-------------------Tokens-------------------|\n"
         "| Occurrence | Token | Lexeme         | Line |\n"
         "|------------|-------|----------------|------|\n"
     );
 
+    ep = fopen("./errors.tmp", "w");
+
+    fprintf(ep, "\n"
+        "|--------------------------Errors--------------------------|\n"
+        "| Occurrence | Lexeme         | Description         | Line |\n"
+        "|------------|----------------|---------------------|------|\n"
+    );
+
     yylex();
-
+    
     fclose(ep);
-    remove("./errors.tmp");
+    fclose(fp);
+    
+    ep = fopen("./errors.tmp", "r");
+    char ch;
+    while ((ch = fgetc(ep)) != EOF)
+        putchar(ch);
+    fclose(ep);
 
+    remove("./errors.tmp");
     printf("\n");
 
     return 0;
