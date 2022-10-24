@@ -22,55 +22,6 @@ void writeErrorRow(char *lexeme, char *desc);
 #define CYAN              36
 #define AUTO              0
 
-#define IDENTIFIER        1
-
-#define SUBTRACT_OP       2
-#define ADDITION_OP       3
-#define DIVISION_OP       4
-#define MULTIPLY_OP       5
-
-#define GREATER_THAN      6
-#define SMALLER_THAN      7
-#define LESS_EQUAL        8
-#define MORE_EQUAL        9
-#define COMPARISON        10
-
-#define AND_OP            11
-#define OR_OP             12
-#define NOT_OP            13
-
-#define PROGRAM_KEYWORD	  14
-#define BEGIN_KEYWORD     15
-#define END_KEYWORD       16
-#define INPUT_KEYWORD	  17
-#define OUTPUT_KEYWORD	  18
-#define INTEGER_KEYWORD	  19
-#define REAL_KEYWORD	  20
-#define CHAR_KEYWORD	  21
-#define STRING_KEYWORD	  22
-#define BOOLEAN_KEYWORD	  23
-#define IF_KEYWORD        24
-#define	ELSE_KEYWORD	  25
-#define THEN_KEYWORD	  26
-#define WHILE_KEYWORD	  27
-#define DO_KEYWORD        28
-#define REPEAT_KEYWORD	  29
-#define UNTIL_KEYWORD	  30
-#define VAR_KEYWORD       31
-#define	TRUE_KEYWORD	  32
-#define FALSE_KEYWORD	  33
-
-#define OPEN_PARENTHESIS  34
-#define CLOSE_PARENTHESIS 35
-#define SEMICOLON         36
-#define COLON             37
-#define COMMA             38
-#define EQUALS            39
-
-#define COMMENT           40
-
-#define INTEGER           41
-
 %}
 
 /* Rule section */

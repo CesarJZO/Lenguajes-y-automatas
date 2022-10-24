@@ -24,54 +24,54 @@ void printRow(int token, char *lexeme, int color);
 #define CYAN              36
 #define AUTO              0
 
-#define IDENTIFIER        97
+#define IDENTIFIER        -61
 
-#define SUBTRACT_OP       89
-#define ADDITION_OP       88
-#define DIVISION_OP       91
-#define MULTIPLY_OP       90
+#define SUBTRACT_OP       -32
+#define ADDITION_OP       -31
+#define DIVISION_OP       -34
+#define MULTIPLY_OP       -33
 
-#define GREATER_THAN      94
-#define SMALLER_THAN      92
-#define LESS_EQUAL        93
-#define MORE_EQUAL        95
-#define COMPARISON        107
+#define GREATER_THAN      -43
+#define SMALLER_THAN      -41
+#define LESS_EQUAL        -42
+#define MORE_EQUAL        -44
+#define COMPARISON        -45
 
-#define AND_OP            98
-#define OR_OP             99
-#define NOT_OP            100
+#define AND_OP            -46
+#define OR_OP             -47
+#define NOT_OP            -48
 
-#define PROGRAM_KEYWORD	  53
-#define BEGIN_KEYWORD     5
-#define END_KEYWORD       23
-#define INPUT_KEYWORD	  34
-#define OUTPUT_KEYWORD	  46
-#define INTEGER_KEYWORD	  40
-#define REAL_KEYWORD	  57
-#define CHAR_KEYWORD	  15
-#define STRING_KEYWORD	  67
-#define BOOLEAN_KEYWORD	  11
-#define IF_KEYWORD        30
-#define	ELSE_KEYWORD	  21
-#define THEN_KEYWORD	  71
-#define WHILE_KEYWORD	  87
-#define DO_KEYWORD        17
-#define REPEAT_KEYWORD	  61
-#define UNTIL_KEYWORD	  79
-#define VAR_KEYWORD       82
-#define	TRUE_KEYWORD	  74
-#define FALSE_KEYWORD	  28
+#define PROGRAM_KEYWORD	  -12
+#define BEGIN_KEYWORD     -1
+#define END_KEYWORD       -6
+#define INPUT_KEYWORD	  -9
+#define OUTPUT_KEYWORD	  -11
+#define INTEGER_KEYWORD	  -10
+#define REAL_KEYWORD	  -13
+#define CHAR_KEYWORD	  -3
+#define STRING_KEYWORD	  -15
+#define BOOLEAN_KEYWORD	  -2
+#define IF_KEYWORD        -8
+#define	ELSE_KEYWORD	  -5
+#define THEN_KEYWORD	  -16
+#define WHILE_KEYWORD	  -20
+#define DO_KEYWORD        -4
+#define REPEAT_KEYWORD	  -14
+#define UNTIL_KEYWORD	  -18
+#define VAR_KEYWORD       -19
+#define	TRUE_KEYWORD	  -17
+#define FALSE_KEYWORD	  -7
 
-#define OPEN_PARENTHESIS  101
-#define CLOSE_PARENTHESIS 102
-#define SEMICOLON         103
-#define COLON             105
-#define COMMA             104
-#define EQUALS            106
+#define OPEN_PARENTHESIS  -81
+#define CLOSE_PARENTHESIS -82
+#define SEMICOLON         -83
+#define COLON             -85
+#define COMMA             -84
+#define EQUALS            -86
 
-#define COMMENT           112
+#define COMMENT           -70
 
-#define INTEGER           108
+#define INTEGER           -71
 
 %}
 
