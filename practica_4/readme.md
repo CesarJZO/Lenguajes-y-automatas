@@ -1,5 +1,7 @@
 # Práctica 4: Análisis léxico
 
+## Bash
+
 Primero hay que preparar las carpetas necesarias para almacenar los códigos generados y los ejecutables
 
 ```bash
@@ -34,4 +36,25 @@ En caso de usar el programa que muestra los tokens con por su nombre, se compila
 
 ```bash
 flex -o ./c/lexs.c lexs.l; gcc -o ./bin/lexs ./c/lexs.c; ./bin/lexs test_program.la
+```
+
+## Powershell
+
+Crear carpetas necesarias
+
+```powershell
+New-Item -Type Directory bin
+New-Item -Type Directory c
+```
+
+Para mostrar la tabla con tokens numéricos
+
+```powershell
+flex.exe -o .\c\lex.c .\lex.l; gcc.exe .\c\lex.c -o .\bin\lex.exe; .\bin\lex.exe .\test_program.la
+```
+
+Mostrar la tabla con tokens descriptivos
+
+```powershell
+flex.exe -o .\c\lexs.c .\lexs.l; gcc.exe .\c\lexs.c -o .\bin\lexs.exe; .\bin\lexs.exe .\test_program.la
 ```
