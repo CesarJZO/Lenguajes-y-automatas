@@ -1,8 +1,9 @@
-program beginblabla
-    integer&result1 = (&var0 -&Var_154) / 15
-
+program begin
+    bla = _identifier;
+    integer&result1 = (&var0 -&Var_154) / 15;
+$^
     if (&result1>= 0 & &var0==5) then:
-        output -512
-    elses:
-        output 6587 // <comment!¿//
+        output -512;
+    elsela:
+        output 6587; // &comment?<>///
 end// //

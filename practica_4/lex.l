@@ -4,12 +4,25 @@
 int occurrences = 1;
 int lines = 1;
 
-void printRow(int token, char *lexeme);
+FILE *ep;
+int errorOccurrences = 1;
 
-#define RED               "\x1b[31m"
-#define GREEN             "\x1b[32m"
-#define MAGENTA           "\x1b[35m"
-#define RESET             "\x1b[0m"
+void writeErrorRow(char *lexeme, char *desc);
+void printRow(int token, char *lexeme, int color);
+
+#define ANSI_RED          "\x1b[31m"
+#define ANSI_GREEN        "\x1b[32m"
+#define ANSI_MAGENTA      "\x1b[35m"
+#define ANSI_RESET        "\x1b[0m"
+
+#define GRAY              2
+#define RED               31
+#define GREEN             32
+#define YELLOW            33
+#define BLUE              34
+#define MAGENTA           35
+#define CYAN              36
+#define AUTO              0
 
 #define IDENTIFIER        97
 
@@ -67,65 +80,75 @@ void printRow(int token, char *lexeme);
 
 [ \t\r] /* no action: ignore all white space */
 
-"&"[a-zA-Z]+"_"{0,1}[0-9]* { printRow(IDENTIFIER, yytext); }
+"&"[a-zA-Z]+"_"{0,1}[0-9]* { printRow(IDENTIFIER, yytext, RED); }
 
-"-"             { printRow(SUBTRACT_OP,       yytext); }
-"+"             { printRow(ADDITION_OP,       yytext); }
-"/"             { printRow(DIVISION_OP,       yytext); }
-"*"             { printRow(MULTIPLY_OP,       yytext); }
+"-"             { printRow(SUBTRACT_OP,       yytext,    CYAN); }
+"+"             { printRow(ADDITION_OP,       yytext,    CYAN); }
+"/"             { printRow(DIVISION_OP,       yytext,    CYAN); }
+"*"             { printRow(MULTIPLY_OP,       yytext,    CYAN); }
 
-"<"             { printRow(SMALLER_THAN,      yytext); }
-">"             { printRow(GREATER_THAN,      yytext); }
-"<="            { printRow(LESS_EQUAL,        yytext); }
-">="            { printRow(MORE_EQUAL,        yytext); }
-"=="            { printRow(COMPARISON,        yytext); }
+"<"             { printRow(SMALLER_THAN,      yytext,    BLUE); }
+">"             { printRow(GREATER_THAN,      yytext,    BLUE); }
+"<="            { printRow(LESS_EQUAL,        yytext,    BLUE); }
+">="            { printRow(MORE_EQUAL,        yytext,    BLUE); }
+"=="            { printRow(COMPARISON,        yytext,    BLUE); }
 
-"&"             { printRow(AND_OP,            yytext); }
-"|"             { printRow(OR_OP,             yytext); }
-"~"             { printRow(NOT_OP,            yytext); }
+"&"             { printRow(AND_OP,            yytext,    BLUE); }
+"|"             { printRow(OR_OP,             yytext,    BLUE); }
+"~"             { printRow(NOT_OP,            yytext,    BLUE); }
 
-"program"       { printRow(PROGRAM_KEYWORD,   yytext); }
-"begin"         { printRow(BEGIN_KEYWORD,     yytext); }
-"end"           { printRow(END_KEYWORD,       yytext); }
-"input"         { printRow(INPUT_KEYWORD,     yytext); }
-"output"        { printRow(OUTPUT_KEYWORD,    yytext); }
-"integer"       { printRow(INTEGER_KEYWORD,   yytext); }
-"real"          { printRow(REAL_KEYWORD,      yytext); }
-"char"          { printRow(CHAR_KEYWORD,      yytext); }
-"string"        { printRow(STRING_KEYWORD,    yytext); }
-"boolean"       { printRow(BOOLEAN_KEYWORD,   yytext); }
-"if"            { printRow(IF_KEYWORD,        yytext); }
-"else"          { printRow(ELSE_KEYWORD,      yytext); }
-"then"          { printRow(THEN_KEYWORD,      yytext); }
-"while"         { printRow(WHILE_KEYWORD,     yytext); }
-"do"            { printRow(DO_KEYWORD,        yytext); }
-"repeat"        { printRow(REPEAT_KEYWORD,    yytext); }
-"until"         { printRow(UNTIL_KEYWORD,     yytext); }
-"var"           { printRow(VAR_KEYWORD,       yytext); }
-"true"          { printRow(TRUE_KEYWORD,      yytext); }
-"false"         { printRow(FALSE_KEYWORD,     yytext); }
+"program"       { printRow(PROGRAM_KEYWORD,   yytext, MAGENTA); }
+"begin"         { printRow(BEGIN_KEYWORD,     yytext, MAGENTA); }
+"end"           { printRow(END_KEYWORD,       yytext, MAGENTA); }
+"input"         { printRow(INPUT_KEYWORD,     yytext, MAGENTA); }
+"output"        { printRow(OUTPUT_KEYWORD,    yytext, MAGENTA); }
+"integer"       { printRow(INTEGER_KEYWORD,   yytext, MAGENTA); }
+"real"          { printRow(REAL_KEYWORD,      yytext, MAGENTA); }
+"char"          { printRow(CHAR_KEYWORD,      yytext, MAGENTA); }
+"string"        { printRow(STRING_KEYWORD,    yytext, MAGENTA); }
+"boolean"       { printRow(BOOLEAN_KEYWORD,   yytext, MAGENTA); }
+"if"            { printRow(IF_KEYWORD,        yytext, MAGENTA); }
+"else"          { printRow(ELSE_KEYWORD,      yytext, MAGENTA); }
+"then"          { printRow(THEN_KEYWORD,      yytext, MAGENTA); }
+"while"         { printRow(WHILE_KEYWORD,     yytext, MAGENTA); }
+"do"            { printRow(DO_KEYWORD,        yytext, MAGENTA); }
+"repeat"        { printRow(REPEAT_KEYWORD,    yytext, MAGENTA); }
+"until"         { printRow(UNTIL_KEYWORD,     yytext, MAGENTA); }
+"var"           { printRow(VAR_KEYWORD,       yytext, MAGENTA); }
+"true"          { printRow(TRUE_KEYWORD,      yytext, MAGENTA); }
+"false"         { printRow(FALSE_KEYWORD,     yytext, MAGENTA); }
 
-"("             { printRow(OPEN_PARENTHESIS,  yytext); }
-")"             { printRow(CLOSE_PARENTHESIS, yytext); }
-";"             { printRow(SEMICOLON,         yytext); }
-","             { printRow(COMMA,             yytext); }
-":"             { printRow(COLON,             yytext); }
-"="             { printRow(EQUALS,            yytext); }
+"("             { printRow(OPEN_PARENTHESIS,  yytext,    AUTO); }
+")"             { printRow(CLOSE_PARENTHESIS, yytext,    AUTO); }
+";"             { printRow(SEMICOLON,         yytext,    AUTO); }
+","             { printRow(COMMA,             yytext,    AUTO); }
+":"             { printRow(COLON,             yytext,    AUTO); }
+"="             { printRow(EQUALS,            yytext,    AUTO); }
 
-"//".+"//"      { printRow(COMMENT, yytext); }
+"//".+"//"      { printRow(COMMENT,           yytext,    GRAY); }
 
-[0-9]+          { printRow(INTEGER, yytext); }
+[0-9]+          { printRow(INTEGER,           yytext,  YELLOW); }
 
 \n              { lines++; }
 
-. { printf(RED "Error: " MAGENTA "%s" RESET " is not a valid token\n", yytext); }
+.               { writeErrorRow(yytext,    "Unexpected token"); }
 
 %%
 
-void printRow(int token, char *lexeme)
+void writeErrorRow(char *lexeme, char *description)
+{
+    fprintf(ep,
+        "| %-11d|" ANSI_RED " %-15s" ANSI_RESET "| %-20s| %-5d|\n",
+        errorOccurrences, lexeme, description, lines
+    );
+    errorOccurrences++;
+}
+
+void printRow(int token, char *lexeme, int color)
 {
     printf(
-        "| %-11d| %-6d| %-15s| %-5d|\n", occurrences, token, lexeme, lines
+        "| %-11d| %-6d|\x1b[%dm %-29s" ANSI_RESET "| %-5d|\n",
+        occurrences, token, color, lexeme, lines
     );
     occurrences++;
 }
@@ -136,7 +159,7 @@ int main(int length, char **args)
 {
     if (length == 1)
     {
-        printf(RED "Error: " RESET "You need to provide a file to be read\n");
+        printf(ANSI_RED "Error: " ANSI_RESET "You need to provide a file to be read\n");
         return 1;
     }
 
@@ -145,12 +168,31 @@ int main(int length, char **args)
     yyin = fp;
 
     printf(
-        "| Occurrence | Token | Lexeme         | Line |\n"
-        "|------------|-------|----------------|------|\n"
+        "|--------------------------Tokens--------------------------|\n"
+        "| Occurrence | Token | Lexeme                       | Line |\n"
+        "|------------|-------|------------------------------|------|\n"
+    );
+
+    ep = fopen("./errors.tmp", "w");
+
+    fprintf(ep, "\n"
+        "|--------------------------Errors--------------------------|\n"
+        "| Occurrence | Lexeme         | Description         | Line |\n"
+        "|------------|----------------|---------------------|------|\n"
     );
 
     yylex();
+    
+    fclose(ep);
+    fclose(fp);
+    
+    ep = fopen("./errors.tmp", "r");
+    char ch;
+    while ((ch = fgetc(ep)) != EOF)
+        putchar(ch);
+    fclose(ep);
 
+    remove("./errors.tmp");
     printf("\n");
 
     return 0;
