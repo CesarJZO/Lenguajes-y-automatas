@@ -11,54 +11,54 @@ void printRow(int token, char *lexeme);
 #define MAGENTA           "\x1b[35m"
 #define RESET             "\x1b[0m"
 
-#define IDENTIFIER        1
+#define IDENTIFIER        97
 
-#define SUBTRACT_OP       2
-#define ADDITION_OP       3
-#define DIVISION_OP       4
-#define MULTIPLY_OP       5
+#define SUBTRACT_OP       89
+#define ADDITION_OP       88
+#define DIVISION_OP       91
+#define MULTIPLY_OP       90
 
-#define GREATER_THAN      6
-#define SMALLER_THAN      7
-#define LESS_EQUAL        8
-#define MORE_EQUAL        9
-#define COMPARISON        10
+#define GREATER_THAN      94
+#define SMALLER_THAN      92
+#define LESS_EQUAL        93
+#define MORE_EQUAL        95
+#define COMPARISON        107
 
-#define AND_OP            11
-#define OR_OP             12
-#define NOT_OP            13
+#define AND_OP            98
+#define OR_OP             99
+#define NOT_OP            100
 
-#define PROGRAM_KEYWORD	  14
-#define BEGIN_KEYWORD     15
-#define END_KEYWORD       16
-#define INPUT_KEYWORD	  17
-#define OUTPUT_KEYWORD	  18
-#define INTEGER_KEYWORD	  19
-#define REAL_KEYWORD	  20
-#define CHAR_KEYWORD	  21
-#define STRING_KEYWORD	  22
-#define BOOLEAN_KEYWORD	  23
-#define IF_KEYWORD        24
-#define	ELSE_KEYWORD	  25
-#define THEN_KEYWORD	  26
-#define WHILE_KEYWORD	  27
-#define DO_KEYWORD        28
-#define REPEAT_KEYWORD	  29
-#define UNTIL_KEYWORD	  30
-#define VAR_KEYWORD       31
-#define	TRUE_KEYWORD	  32
-#define FALSE_KEYWORD	  33
+#define PROGRAM_KEYWORD	  53
+#define BEGIN_KEYWORD     5
+#define END_KEYWORD       23
+#define INPUT_KEYWORD	  34
+#define OUTPUT_KEYWORD	  46
+#define INTEGER_KEYWORD	  40
+#define REAL_KEYWORD	  57
+#define CHAR_KEYWORD	  15
+#define STRING_KEYWORD	  67
+#define BOOLEAN_KEYWORD	  11
+#define IF_KEYWORD        30
+#define	ELSE_KEYWORD	  21
+#define THEN_KEYWORD	  71
+#define WHILE_KEYWORD	  87
+#define DO_KEYWORD        17
+#define REPEAT_KEYWORD	  61
+#define UNTIL_KEYWORD	  79
+#define VAR_KEYWORD       82
+#define	TRUE_KEYWORD	  74
+#define FALSE_KEYWORD	  28
 
-#define OPEN_PARENTHESIS  34
-#define CLOSE_PARENTHESIS 35
-#define SEMICOLON         36
-#define COLON             37
-#define COMMA             38
-#define EQUALS            39
+#define OPEN_PARENTHESIS  101
+#define CLOSE_PARENTHESIS 102
+#define SEMICOLON         103
+#define COLON             105
+#define COMMA             104
+#define EQUALS            106
 
-#define COMMENT           40
+#define COMMENT           112
 
-#define INTEGER           41
+#define INTEGER           108
 
 %}
 
