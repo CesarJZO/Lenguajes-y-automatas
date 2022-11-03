@@ -70,13 +70,15 @@ void writeErrorRow(char *lexeme, char *desc);
 "{"             { printRow("opening block",     yytext,    AUTO); }
 "}"             { printRow("closing block",     yytext,    AUTO); }
 
-"<-"            { printRow("assignment",       yytext,    AUTO); }
+"<-"            { printRow("assignment",        yytext,    AUTO); }
 
 ":)".+          { printRow("comment",           yytext,    GRAY); }
 "</>".+"</>"    { printRow("doc",               yytext,    GRAY); }
 
 [0-9]+          { printRow("integer",           yytext,  YELLOW); }
 [0-9]+"."[0-9]+ { printRow("real",              yytext,  YELLOW); }
+
+\'.+\'          { printRow("text",              yytext,  YELLOW); }
 
 \n              { lines++; }
 

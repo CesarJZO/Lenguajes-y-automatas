@@ -1,15 +1,8 @@
-var
-hola
-if
-variable_1
-_variableDos
-Variable_3vecesYA
-else
-?</>docs </>:) comentar<i>o !
-</>doc
-</>
-095.25 5512
-<-
-+/-*
-&|~
-=<><=>
+var variable <- 1.5;
+</>nohace nada</>
+if (hola_25_v1 & variable = 75) {
+    true:)com en_tario
+}
+fun imprimir() print;
+?//c
+txt nombre ='juan'
