@@ -78,7 +78,7 @@ void writeErrorRow(char *lexeme, char *desc);
 [0-9]+          { printRow("integer",           yytext,  YELLOW); }
 [0-9]+"."[0-9]+ { printRow("real",              yytext,  YELLOW); }
 
-\'.+\'          { printRow("text",              yytext,  YELLOW); }
+\'.*\'          { printRow("text",              yytext,  YELLOW); }
 
 \n              { lines++; }
 
