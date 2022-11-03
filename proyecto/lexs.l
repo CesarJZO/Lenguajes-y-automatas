@@ -61,17 +61,18 @@ void writeErrorRow(char *lexeme, char *desc);
 "is"            { printRow("keyword",           yytext, MAGENTA); }
 "null"          { printRow("keyword",           yytext, MAGENTA); }
 
-[a-zA-Z_][a-zA-Z0-9_]* { printRow("identifier", yytext, GREEN); }
+[a-z_][a-zA-Z0-9_]* { printRow("identifier",    yytext,   GREEN); }
 
 "("             { printRow("open parenthesis",  yytext,    AUTO); }
 ")"             { printRow("close parenthesis", yytext,    AUTO); }
 ";"             { printRow("semicolon",         yytext,    AUTO); }
 ","             { printRow("comma",             yytext,    AUTO); }
-":"             { printRow("colon",             yytext,    AUTO); }
+"{"             { printRow("opening block",     yytext,    AUTO); }
+"}"             { printRow("closing block",     yytext,    AUTO); }
 
-"<-"            { printRow("assignation",       yytext,    AUTO); }
+"<-"            { printRow("assignment",       yytext,    AUTO); }
 
-":)".+ { printRow("comment",           yytext,    GRAY); }
+":)".+          { printRow("comment",           yytext,    GRAY); }
 "</>".+"</>"    { printRow("doc",               yytext,    GRAY); }
 
 [0-9]+          { printRow("integer",           yytext,  YELLOW); }
@@ -122,7 +123,7 @@ int main(int length, char **args)
     );
 
     ep = fopen("./errors.tmp", "w");
-
+	
     fprintf(ep, "\n"
         "|--------------------------Errors--------------------------|\n"
         "| Occurrence | Lexeme         | Description         | Line |\n"
@@ -133,7 +134,12 @@ int main(int length, char **args)
     
     fclose(ep);
     fclose(fp);
-    
+	
+	if (errorOccurrences == 1) {
+    	remove("./errors.tmp");
+		return 0;
+	}
+ 
     ep = fopen("./errors.tmp", "r");
     char ch;
     while ((ch = fgetc(ep)) != EOF)
