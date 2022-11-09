@@ -4,4 +4,5 @@ tests/
 *.out
 **/bin/
 practica_4/c/
+practica_5/*.c
 proyecto/*.c
