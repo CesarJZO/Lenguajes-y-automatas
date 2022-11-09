@@ -1,4 +1,3 @@
-/* Definition section */
 %{
 
 int occurrences = 1;
@@ -24,10 +23,9 @@ void writeErrorRow(char *lexeme, char *desc);
 
 %}
 
-/* Rule section */
 %%
 
-[ \t\r] /* no action: ignore all white space */
+[ \t\r]
 
 "+"             { printRow("addition",          yytext,    CYAN); }
 "-"             { printRow("subtraction",       yytext,    CYAN); }
@@ -78,7 +76,7 @@ void writeErrorRow(char *lexeme, char *desc);
 [0-9]+          { printRow("integer",           yytext,  YELLOW); }
 [0-9]+"."[0-9]+ { printRow("real",              yytext,  YELLOW); }
 
-\'.*\'          { printRow("text",              yytext,  YELLOW); }
+"\'".*"\'"      { printRow("text",              yytext,  YELLOW); }
 
 \n              { lines++; }
 
