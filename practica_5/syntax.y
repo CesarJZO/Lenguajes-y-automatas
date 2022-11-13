@@ -1,8 +1,6 @@
 %{
-
 int yylex();
 int yyerror(char*);
-
 %}
 
 %token PROGRAM_KW
@@ -23,10 +21,9 @@ int yyerror(char*);
 
 %token IDENTIFIER
 
+%token SEPARATOR
 %token DATA_ASSIGN
-
 %token EOE
-%token EOL
 
 %token ASSIGNER
 
@@ -43,21 +40,32 @@ int yyerror(char*);
 %token LESS_EQUAL
 %token EQUAL_TO
 
-%start program
-
 %%
 
-program: head	{ printf("Inicio valido\n"); }
-	| head declaration_block
+program: head				 	{ printf("Solo encabezado\n"); }
+	| head declaration_block 	{ printf("head+declare\n"); }
 	;
 
-head: PROGRAM_KW IDENTIFIER EOE EOL;
-declaration_block: VAR_KW EOL var_declaration;
+head: PROGRAM_KW IDENTIFIER EOE { printf("Linea de programa\n"); }
+	;
 
-var_declaration: IDENTIFIER DATA_ASSIGN data_type EOE;
+declaration_block: VAR_KW var_declarations { printf("Bloque de variables\n"); }
+	| VAR_KW					{ printf("Bloque de variables vacio\n"); }
+	;
 
-data_type: INTEGER_KW
-	| BOOLEAN_KW;
+var_declarations:
+	  identifiers DATA_ASSIGN data_type EOE var_declarations
+	| identifiers DATA_ASSIGN data_type EOE
+	;
+
+identifiers:
+	  IDENTIFIER				{ printf("Una variable en una linea\n");}
+	| IDENTIFIER SEPARATOR identifiers { printf("Multiples variables en la misma linea\n"); }
+	;
+
+data_type: INTEGER_KW  	{ printf("Integers\n"); }
+	| BOOLEAN_KW 		{ printf("Bools\n"); }
+	;
 
 %%
 

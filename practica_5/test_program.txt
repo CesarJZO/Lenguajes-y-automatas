@@ -1,4 +1,5 @@
 program #nombre;
-
 var
-#uno : integer ;
+#uno, #dos : integer ;
+#tres: boolean;
+//#cuatro, #cinco : boolean ;

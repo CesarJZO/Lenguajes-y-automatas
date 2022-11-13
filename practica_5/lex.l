@@ -5,8 +5,9 @@ int line = 1;
 
 %%
 
-"//".+
-[ \t\r]
+"//".+      { }
+[ \t\r]     { }
+\n          { line++; }
 
 "program"   { return PROGRAM_KW; }
 "var"       { return VAR_KW;     }
@@ -26,6 +27,7 @@ int line = 1;
 
 "#"[a-z]+   { return IDENTIFIER; }
 
+","         { return SEPARATOR; }
 ":"         { return DATA_ASSIGN;}
 ";"         { return EOE;        } // End of expression
 
@@ -44,11 +46,7 @@ int line = 1;
 "<="      { return LESS_EQUAL; }
 "="       { return EQUAL_TO;   }
 
-\n        { line++; return EOL; }
-
 .         { printf("Invalid token at line %d\n", line); return -1; }
-
-<<EOF>>   { return -1; }
 
 %%
 
