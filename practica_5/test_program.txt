@@ -2,4 +2,10 @@ program #nombre;
 var
 #uno, #dos : integer ;
 #tres: boolean;
-//#cuatro, #cinco : boolean ;
+// #cuatro,#cinco:boolean;
+
+begin
+
+    #uno :=  10 + (39 * #dos);
+
+end

@@ -46,6 +46,9 @@ int line = 1;
 "<="      { return LESS_EQUAL; }
 "="       { return EQUAL_TO;   }
 
+"("       { return OPEN_PAR;  }
+")"       { return CLOSE_PAR; }
+
 .         { printf("Invalid token at line %d\n", line); return -1; }
 
 %%

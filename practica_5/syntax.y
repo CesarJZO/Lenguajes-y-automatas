@@ -34,6 +34,9 @@ int yyerror(char*);
 %token MUL_OP
 %token DIV_OP
 
+%token OPEN_PAR
+%token CLOSE_PAR
+
 %token MORE_THAN
 %token LESS_THAN
 %token MORE_EQUAL
@@ -42,15 +45,19 @@ int yyerror(char*);
 
 %%
 
-program: head				 	{ printf("Solo encabezado\n"); }
-	| head declaration_block 	{ printf("head+declare\n"); }
+program:
+	  head				 			{ printf("Solo encabezado\n");   }
+	| head declaration_block 		{ printf("head+declare\n"); 	 }
+	| head declaration_block body	{ printf("head+declare+body\n"); }
 	;
 
-head: PROGRAM_KW IDENTIFIER EOE { printf("Linea de programa\n"); }
+head:
+	  PROGRAM_KW IDENTIFIER EOE
 	;
 
-declaration_block: VAR_KW var_declarations { printf("Bloque de variables\n"); }
-	| VAR_KW					{ printf("Bloque de variables vacio\n"); }
+declaration_block:
+	  VAR_KW var_declarations
+	| VAR_KW
 	;
 
 var_declarations:
@@ -59,13 +66,43 @@ var_declarations:
 	;
 
 identifiers:
-	  IDENTIFIER				{ printf("Una variable en una linea\n");}
-	| IDENTIFIER SEPARATOR identifiers { printf("Multiples variables en la misma linea\n"); }
+	  IDENTIFIER
+	| IDENTIFIER SEPARATOR identifiers
 	;
 
-data_type: INTEGER_KW  	{ printf("Integers\n"); }
-	| BOOLEAN_KW 		{ printf("Bools\n"); }
+data_type: INTEGER_KW | BOOLEAN_KW;
+
+body:
+	  BEGIN_KW END_KW { printf("empty body\n"); }
+	| BEGIN_KW instruction END_KW
 	;
+
+instruction:
+	  assignation EOE
+	;
+
+assignation:
+	  IDENTIFIER ASSIGNER operation
+	;
+
+value:
+	  INTEGER
+	| IDENTIFIER
+	;
+
+operation:
+	  value
+	| value operator value
+	| operation operation wrap
+	| value operator wrap
+	;
+
+wrap:
+	  OPEN_PAR operation CLOSE_PAR
+	;
+	  
+
+operator: SUB_OP | ADD_OP | MUL_OP | DIV_OP;
 
 %%
 
@@ -77,6 +114,5 @@ int yyerror(char *e)
 int main()
 {
 	yyparse();
-
 	return 0;
 }
