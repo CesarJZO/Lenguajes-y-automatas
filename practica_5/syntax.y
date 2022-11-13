@@ -73,8 +73,13 @@ identifiers:
 data_type: INTEGER_KW | BOOLEAN_KW;
 
 body:
-	  BEGIN_KW END_KW { printf("empty body\n"); }
-	| BEGIN_KW instruction END_KW
+	  BEGIN_KW END_KW
+	| BEGIN_KW instructions END_KW
+	;
+
+instructions:
+	  instruction instructions
+	| instruction
 	;
 
 instruction:
@@ -82,7 +87,7 @@ instruction:
 	;
 
 assignation:
-	  IDENTIFIER ASSIGNER operation
+	  IDENTIFIER ASSIGNER result
 	;
 
 value:
@@ -90,17 +95,11 @@ value:
 	| IDENTIFIER
 	;
 
-operation:
+result:
 	  value
-	| value operator value
-	| operation operation wrap
-	| value operator wrap
+	| result operator result
+	| OPEN_PAR result CLOSE_PAR
 	;
-
-wrap:
-	  OPEN_PAR operation CLOSE_PAR
-	;
-	  
 
 operator: SUB_OP | ADD_OP | MUL_OP | DIV_OP;
 
