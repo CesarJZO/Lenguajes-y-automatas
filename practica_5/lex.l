@@ -1,31 +1,33 @@
 %{
-
+#include "syntax.tab.h"
 int line = 1;
-
 %}
 
 %%
 
-program   { return PROGRAM_KW; }
-var       { return VAR_KW;     }
-integer   { return INTEGER_KW; }
-boolean   { return BOOLEAN_KW; }
-begin	  { return BEGIN_KW;   }
-end		  { return END_KW;     }
-if        { return IF_KW;      }
-then      { return THEN_KW;    }
-else      { return ELSE_KW;    }
-input	  { return INPUT_KW;   }
-output    { return OUTPUT_KW;  }
-while     { return WHILE_KW;   }
-do        { return DO_KW;      }
-repeat    { return REPEAT_KW;  }
-until     { return UNTIL_KW;   }
+"//".+
+[ \t\r]
 
-"#"[a-z]+ { return IDENTIFIER; }
+"program"   { return PROGRAM_KW; }
+"var"       { return VAR_KW;     }
+"integer"   { return INTEGER_KW; }
+"boolean"   { return BOOLEAN_KW; }
+"begin"	    { return BEGIN_KW;   }
+"end"		{ return END_KW;     }
+"if"        { return IF_KW;      }
+"then"      { return THEN_KW;    }
+"else"      { return ELSE_KW;    }
+"input"	    { return INPUT_KW;   }
+"output"    { return OUTPUT_KW;  }
+"while"     { return WHILE_KW;   }
+"do"        { return DO_KW;      }
+"repeat"    { return REPEAT_KW;  }
+"until"     { return UNTIL_KW;   }
 
-":"       { return DATA_TYPE;  }
-";"       { return DELIMITER;  }
+"#"[a-z]+   { return IDENTIFIER; }
+
+":"         { return DATA_ASSIGN;}
+";"         { return EOE;        } // End of expression
 
 ":="      { return ASSIGNER;   }
 
@@ -38,12 +40,16 @@ until     { return UNTIL_KW;   }
 
 ">"       { return MORE_THAN;  }
 "<"       { return LESS_THAN;  }
-">="      { return MORE_EQUAL;  }
+">="      { return MORE_EQUAL; }
 "<="      { return LESS_EQUAL; }
 "="       { return EQUAL_TO;   }
 
-\n        { line++;            }
+\n        { line++; return EOL; }
 
-.         { yyerror(yytext);   }
+.         { printf("Invalid token at line %d\n", line); return -1; }
+
+<<EOF>>   { return -1; }
 
 %%
+
+int yywrap() { }

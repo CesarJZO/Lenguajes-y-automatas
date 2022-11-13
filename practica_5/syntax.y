@@ -1,9 +1,7 @@
 %{
 
-#include <stdio.h>
-
-int yylex(void);
-void yyerror(char const*);
+int yylex();
+int yyerror(char*);
 
 %}
 
@@ -25,8 +23,10 @@ void yyerror(char const*);
 
 %token IDENTIFIER
 
-%token DATA_TYPE
-%token DELIMITER
+%token DATA_ASSIGN
+
+%token EOE
+%token EOL
 
 %token ASSIGNER
 
@@ -47,11 +47,28 @@ void yyerror(char const*);
 
 %%
 
-program: IDENTIFIER DELIMITER;
+program: head	{ printf("Inicio valido\n"); }
+	| head declaration_block
+	;
+
+head: PROGRAM_KW IDENTIFIER EOE EOL;
+declaration_block: VAR_KW EOL var_declaration;
+
+var_declaration: IDENTIFIER DATA_ASSIGN data_type EOE;
+
+data_type: INTEGER_KW
+	| BOOLEAN_KW;
 
 %%
 
+int yyerror(char *e)
+{
+	printf("Error: %s\n", e);
+}
+
 int main()
 {
-	yylex();
+	yyparse();
+
+	return 0;
 }

@@ -1,0 +1,4 @@
+program #nombre;
+
+var
+#uno : integer ;

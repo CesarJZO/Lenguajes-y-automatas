@@ -5,3 +5,4 @@ tests/
 **/bin/
 practica_4/c/
 **/*.c
+**/*.h

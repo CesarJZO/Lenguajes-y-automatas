@@ -1,4 +1,5 @@
 program #nombre;
+
 var 
 // sección de declaración de variables 
 // puede contener cualquier cantidad o ninguna de variables 	// de cualquier tipo definido

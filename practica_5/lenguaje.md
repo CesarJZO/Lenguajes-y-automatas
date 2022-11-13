@@ -53,3 +53,26 @@
 - `>=`
 - `<=`
 - `=`
+
+## Sintaxis
+
+### head
+
+Palabra reservada `program` seguida de un **identificador** seguido de un `;` (fin de sentencia)
+
+```
+program #nombre;
+```
+
+### variables
+
+Palabra reservada `var` inicia el bloque, puede contener cero o mas **variables**
+
+```
+#uno, #dos : integer;
+#tres : boolean;
+```
+
+### code
+
+Palabra reservada `begin` seguida de cero o mas **expresiones**
