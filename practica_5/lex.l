@@ -13,6 +13,8 @@ int line = 1;
 "var"       { return VAR_KW;     }
 "integer"   { return INTEGER_KW; }
 "boolean"   { return BOOLEAN_KW; }
+"true"      { return TRUE_KW;    }
+"false"     { return FALSE_KW;   }
 "begin"	    { return BEGIN_KW;   }
 "end"		{ return END_KW;     }
 "if"        { return IF_KW;      }

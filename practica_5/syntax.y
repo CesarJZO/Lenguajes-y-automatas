@@ -7,6 +7,8 @@ int yyerror(char*);
 %token VAR_KW
 %token INTEGER_KW
 %token BOOLEAN_KW
+%token TRUE_KW
+%token FALSE_KW
 %token BEGIN_KW
 %token END_KW
 %token IF_KW
@@ -86,7 +88,7 @@ instruction: assignation | io;
 
 assignation:
 	  IDENTIFIER ASSIGNER result
-	| IDENTIFIER ASSIGNER logic_operation
+	| IDENTIFIER ASSIGNER logic_result
 	;
 
 io:
@@ -97,6 +99,7 @@ io:
 value:
 	  INTEGER
 	| IDENTIFIER
+	| TRUE_KW | FALSE_KW
 	;
 
 result:
@@ -112,18 +115,18 @@ expressions:
 	| expression
 	;
 
-expression: instructions | if;
+expression: instructions | if | while | repeat;
 
-logic_operation:
+logic_result:
 	  result
-	| logic_operation logic_operator logic_operation
-	| OPEN_PAR logic_operation CLOSE_PAR
+	| logic_result logic_operator logic_result
+	| OPEN_PAR logic_result CLOSE_PAR
 	;
 
 logic_operator: MORE_EQUAL | MORE_THAN | LESS_EQUAL | LESS_THAN | EQUAL_TO;
 
 if:
-	IF_KW logic_operation THEN_KW body
+	IF_KW logic_result THEN_KW body
 	| if else
 	;
 
@@ -131,7 +134,13 @@ else:
 	ELSE_KW body
 	;
 
+while:
+	WHILE_KW logic_result DO_KW body
+	;
 
+repeat:
+	REPEAT_KW body UNTIL_KW logic_result EOE
+	;
 
 %%
 

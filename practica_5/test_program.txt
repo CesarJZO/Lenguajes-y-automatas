@@ -41,4 +41,18 @@ begin
 
     input (#dos);
     output ( #dos) ;
+
+    while ( #dos >  5 ) do
+    begin
+        #dos := #dos + 1;
+        output ( #dos) ;
+    end
+
+    repeat
+    begin
+        #dos := #dos + 2; 
+        output (#dos);
+        input ( #tres );
+    end
+    until ( #tres = true );
 end
