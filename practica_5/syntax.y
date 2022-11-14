@@ -74,20 +74,19 @@ data_type: INTEGER_KW | BOOLEAN_KW;
 
 body:
 	  BEGIN_KW END_KW
-	| BEGIN_KW instructions END_KW
+	| BEGIN_KW expressions END_KW
 	;
 
 instructions:
 	  instruction instructions
-	| instruction
+	| instruction EOE
 	;
 
-instruction:
-	  assignation EOE
-	;
+instruction: assignation;
 
 assignation:
 	  IDENTIFIER ASSIGNER result
+	| IDENTIFIER ASSIGNER logic_operation
 	;
 
 value:
@@ -102,6 +101,30 @@ result:
 	;
 
 operator: SUB_OP | ADD_OP | MUL_OP | DIV_OP;
+
+expressions:
+	  expression expressions
+	| expression
+	;
+
+expression: instructions | if;
+
+logic_operation:
+	  result
+	| logic_operation logic_operator logic_operation
+	| OPEN_PAR logic_operation CLOSE_PAR
+	;
+
+logic_operator: MORE_EQUAL | MORE_THAN | LESS_EQUAL | LESS_THAN | EQUAL_TO;
+
+if:
+	IF_KW logic_operation THEN_KW body
+	| if else
+	;
+
+else:
+	ELSE_KW body
+	;
 
 %%
 
