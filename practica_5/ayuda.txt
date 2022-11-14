@@ -1,0 +1,56 @@
+program:
+	  head				 			{ printf("Solo encabezado\n");   }
+	| head declaration_block 		{ printf("head+declare\n"); 	 }
+	| head declaration_block body	{ printf("head+declare+body\n"); }
+	;
+
+	head:
+		PROGRAM_KW IDENTIFIER EOE
+		;
+
+	declaration_block:
+		VAR_KW var_declarations
+		| VAR_KW
+		;
+
+		var_declarations:
+			identifiers DATA_ASSIGN data_type EOE var_declarations
+			| identifiers DATA_ASSIGN data_type EOE
+			;
+
+			identifiers:
+				IDENTIFIER
+				| IDENTIFIER SEPARATOR identifiers
+				;
+
+			data_type: INTEGER_KW | BOOLEAN_KW;
+
+	body:
+		BEGIN_KW END_KW
+		| BEGIN_KW instructions END_KW
+		;
+
+		instructions:
+			instruction instructions
+			| instruction
+			;
+
+		instruction:
+			assignation EOE
+			;
+
+			assignation:
+				IDENTIFIER ASSIGNER result
+				;
+				
+				result:
+					value
+					| result operator result
+					| OPEN_PAR result CLOSE_PAR
+					;
+					
+						value:
+						INTEGER
+						| IDENTIFIER
+						;
+                        operator: SUB_OP | ADD_OP | MUL_OP | DIV_OP;
