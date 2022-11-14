@@ -7,10 +7,7 @@ var
     #uno,#dos : integer ;
     #tres : boolean ;
 
-
-
 begin
-
     // cuerpo del programa, puede contener cualquier cantidad 
     // de expresiones o estructuras  de control en cualquier 
     // orden, al menos una asignación puede contener cualquier 

@@ -1,13 +1,12 @@
 %{
 #include "syntax.tab.h"
-int line = 1;
 %}
 
 %%
 
 "//".+      { }
 [ \t\r]     { }
-\n          { line++; }
+\n          { }
 
 "program"   { return PROGRAM_KW; }
 "var"       { return VAR_KW;     }
@@ -29,7 +28,7 @@ int line = 1;
 
 "#"[a-z]+   { return IDENTIFIER; }
 
-","         { return SEPARATOR; }
+","         { return SEPARATOR;  }
 ":"         { return DATA_ASSIGN;}
 ";"         { return EOE;        } // End of expression
 
@@ -51,7 +50,7 @@ int line = 1;
 "("       { return OPEN_PAR;  }
 ")"       { return CLOSE_PAR; }
 
-.         { printf("Invalid token at line %d\n", line); return -1; }
+.         { printf("Invalid token\n"); return -1; }
 
 %%
 
