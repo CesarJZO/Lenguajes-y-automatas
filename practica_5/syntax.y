@@ -82,11 +82,16 @@ instructions:
 	| instruction EOE
 	;
 
-instruction: assignation;
+instruction: assignation | io;
 
 assignation:
 	  IDENTIFIER ASSIGNER result
 	| IDENTIFIER ASSIGNER logic_operation
+	;
+
+io:
+	  INPUT_KW | OUTPUT_KW
+	| io OPEN_PAR IDENTIFIER CLOSE_PAR
 	;
 
 value:
@@ -125,6 +130,8 @@ if:
 else:
 	ELSE_KW body
 	;
+
+
 
 %%
 
