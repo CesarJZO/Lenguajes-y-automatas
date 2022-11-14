@@ -1,52 +1,42 @@
 program #nombre;
 
-var 
-// sección de declaración de variables 
-// puede contener cualquier cantidad o ninguna de variables 	// de cualquier tipo definido
+var
 
 #uno,#dos : integer ;
 #tres : boolean ;
+
+
 begin
 
+    #uno :=  10 + ( 39 * #dos ) ;
 
-// cuerpo del programa, puede contener cualquier cantidad 
-// de expresiones o estructuras de control en cualquier 
-// orden, al menos una asignación puede contener cualquier 
-// cantidad de expresiones de asignación utilizando cualquier 
-// combinación de operadores aritméticos, lógicos o 		 
-// relacionales 
+    if ( #uno > 10 ) then
+    begin
+        input (#dos);
+    end
 
+    else
+    begin 
+        output ( #dos);
+        #tres := ( 10  * (89  - 100) ) >= ( #dos ) ;
+    end
 
-#uno :=  10 + ( 39 * #dos ) ;
+    #dos := 1;
 
+    while ( #dos >  5 ) do
+    begin
+        #dos := #dos + 1;
+        output ( #dos) ;
+    end
 
-// estructuras de control y pueden ser simples o anidadas 
-// en la condición para cualquier estructura puede ser 
-// cualquier expresión valida 
-// en el if puede ser estructura simple o compuesta
+    #tres := false;
 
+    repeat
+    begin
+        #dos := #dos + 2; 
+        output (#dos);
+        input ( #tres );
+    end
+    until ( #tres = true );
 
-if ( #uno > 10 ) then
-begin
-input (#dos);
-end
-else
-begin 
-output ( #dos);
-#tres := ( 10  * (89  - 100) ) >= ( #dos ) ;
-end 
-#dos := 1;
-while ( #dos >  5 ) do
-begin
-#dos := #dos + 1;
-output ( #dos) ;
-end
-#tres := false;
-repeat
-begin
-#dos := #dos + 2; 
-output (#dos);
-input ( #tres );
-end
-until ( #tres = true );
 end 
