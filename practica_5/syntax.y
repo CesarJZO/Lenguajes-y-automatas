@@ -49,8 +49,8 @@ int yyerror(char*);
 
 program:
 	  head				 			{ printf("Solo encabezado\n");   }
-	| head declaration_block 		{ printf("head+declare\n"); 	 }
-	| head declaration_block body	{ printf("head+declare+body\n"); }
+	| head declaration_block 		{ printf("Encabezado y bloque de declaraciones\n"); 	 }
+	| head declaration_block body	{ printf("Encabezado, bloque de declaraciones y cuerpo\n"); }
 	;
 
 head:

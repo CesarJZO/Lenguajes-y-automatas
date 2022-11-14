@@ -4,7 +4,7 @@ var
 
 #uno, #dos : integer ;
 #tres: boolean;
-// #cuatro,#cinco:boolean;
+#cuatro,#cinco:boolean;
 
 
 begin
@@ -18,10 +18,7 @@ begin
 
     if ( #uno > 10 ) then
     begin
-       #uno :=  5;
-       #uno :=  5 - (21) + 10;
-       #uno :=  10 + ( 39 * #dos ) ;
-       #uno :=  (10 + 39) * #dos;
+        #uno :=  5;
     end
     else
     begin
