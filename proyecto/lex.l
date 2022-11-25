@@ -1,5 +1,5 @@
 %{
-
+#include "syntax.tab.h"
 %}
 
 %%
