@@ -1,153 +1,63 @@
 %{
 
-int occurrences = 1;
-int lines = 1;
-
-FILE *ep;
-int errorOccurrences = 1;
-
-void printRow(char *token, char *lexeme, int color);
-void writeErrorRow(char *lexeme, char *desc);
-
-#define ANSI_RED          "\x1b[31m"
-#define ANSI_RESET        "\x1b[0m"
-
-#define GRAY              2
-#define RED               31
-#define GREEN             32
-#define YELLOW            33
-#define BLUE              34
-#define MAGENTA           35
-#define CYAN              36
-#define AUTO              0
-
 %}
 
 %%
 
-[ \t\r]
+[ \t\r\n]       { }
 
-"+"             { printRow("addition",          yytext,    CYAN); }
-"-"             { printRow("subtraction",       yytext,    CYAN); }
-"*"             { printRow("multiplication",    yytext,    CYAN); }
-"/"             { printRow("division",          yytext,    CYAN); }
+"+"             { return ADD_OP;     }
+"-"             { return SUB_OP;     }
+"*"             { return MUL_OP;     }
+"/"             { return DIV_OP;     }
 
-"<"             { printRow("less than",         yytext,    BLUE); }
-">"             { printRow("greater than",      yytext,    BLUE); }
-"<="            { printRow("less equal",        yytext,    BLUE); }
-">="            { printRow("greater equal",     yytext,    BLUE); }
-"="             { printRow("comparison",        yytext,    BLUE); }
+">"             { return MORE_THAN;  }
+"<"             { return LESS_THAN;  }
+">="            { return MORE_EQUAL; }
+"<="            { return LESS_EQUAL; }
+"="             { return EQUAL_TO;   }
 
-"&"             { printRow("and",               yytext,    BLUE); }
-"|"             { printRow("or",                yytext,    BLUE); }
-"~"             { printRow("not",               yytext,    BLUE); }
+"&"             { return AND_OP;     }
+"|"             { return OR_OP;      }
+"~"             { return NOT_OP;     }
 
-"fun"           { printRow("keyword",           yytext, MAGENTA); }
-"return"        { printRow("keyword",           yytext, MAGENTA); }
-"int"           { printRow("keyword",           yytext, MAGENTA); }
-"dec"           { printRow("keyword",           yytext, MAGENTA); }
-"txt"           { printRow("keyword",           yytext, MAGENTA); }
-"char"          { printRow("keyword",           yytext, MAGENTA); }
-"bool"          { printRow("keyword",           yytext, MAGENTA); }
-"true"          { printRow("keyword",           yytext, MAGENTA); }
-"false"         { printRow("keyword",           yytext, MAGENTA); }
-"if"            { printRow("keyword",           yytext, MAGENTA); }
-"else"          { printRow("keyword",           yytext, MAGENTA); }
-"while"         { printRow("keyword",           yytext, MAGENTA); }
-"for"           { printRow("keyword",           yytext, MAGENTA); }
-"var"           { printRow("keyword",           yytext, MAGENTA); }
-"is"            { printRow("keyword",           yytext, MAGENTA); }
-"null"          { printRow("keyword",           yytext, MAGENTA); }
+"fun"           { return FUN_KW;     }
+"return"        { return RETURN_KW;  }
+"int"           { return INT_KW;     }
+"dec"           { return DEC_KW;     }
+"txt"           { return TXT_KW;     }
+"char"          { return CHAR_KW;    }
+"bool"          { return BOOL_KW;    }
+"true"          { return TRUE_KW;    }
+"false"         { return FALSE_KW;   }
+"if"            { return IF_KW;      }
+"else"          { return ELSE_KW;    }
+"while"         { return WHILE_KW;   }
+"for"           { return FOR_KW;     }
+"var"           { return VAR_KW;     }
+"is"            { return IS_KW;      }
+"null"          { return NULL_KW;    }
 
-[a-z_][a-zA-Z0-9_]* { printRow("identifier",    yytext,   GREEN); }
+[a-z_][a-zA-Z0-9_]* { return IDENTIFIER; }
 
-"("             { printRow("open parenthesis",  yytext,    AUTO); }
-")"             { printRow("close parenthesis", yytext,    AUTO); }
-";"             { printRow("semicolon",         yytext,    AUTO); }
-","             { printRow("comma",             yytext,    AUTO); }
-"{"             { printRow("opening block",     yytext,    AUTO); }
-"}"             { printRow("closing block",     yytext,    AUTO); }
+"("             { return OPEN_PAR;    }
+")"             { return CLOSE_PAR;   }
+";"             { return SEMICOLON;   }
+","             { return COMMA;       }
+"{"             { return OPEN_BLOCK;  }
+"}"             { return CLOSE_BLOCK; }
 
-"<-"            { printRow("assignment",        yytext,    AUTO); }
+"<-"            { return ASSIGNER;    }
 
-":)".+          { printRow("comment",           yytext,    GRAY); }
-"</>".+"</>"    { printRow("doc",               yytext,    GRAY); }
+":)".+          { }
+"</>".+"</>"    { }
 
-[0-9]+          { printRow("integer",           yytext,  YELLOW); }
-[0-9]+"."[0-9]+ { printRow("real",              yytext,  YELLOW); }
+[0-9]+          { return INTEGER; }
+[0-9]+"."[0-9]+ { return REAL; }
+"\'".*"\'"      { return TEXT; }
 
-"\'".*"\'"      { printRow("text",              yytext,  YELLOW); }
-
-\n              { lines++; }
-
-.               { writeErrorRow(yytext,         "Invalid token"); }
+.               { printf("Lexical error\n"); }
 
 %%
 
-void printRow(char *token, char *lexeme, int color)
-{
-    printf(
-        "| %-11d| %-18s|\x1b[%dm %-17s" ANSI_RESET "| %-5d|\n",
-        occurrences, token, color, lexeme, lines
-    );
-    occurrences++;
-}
-
-void writeErrorRow(char *lexeme, char *description)
-{
-    fprintf(ep,
-        "| %-11d|" ANSI_RED " %-15s" ANSI_RESET "| %-20s| %-5d|\n",
-        errorOccurrences, lexeme, description, lines
-    );
-    errorOccurrences++;
-}
-
 int yywrap() { }
-
-int main(int length, char **args)
-{
-    if (length == 1)
-    {
-        printf(ANSI_RED "Error: " ANSI_RESET "You need to provide a file to be read\n");
-        return 1;
-    }
-
-    FILE *fp;
-    fp = fopen(args[1], "r");
-    yyin = fp;
-
-    printf(
-        "|--------------------------Tokens--------------------------|\n"
-        "| Occurrence | Token             | Lexeme           | Line |\n"
-        "|------------|-------------------|------------------|------|\n"
-    );
-
-    ep = fopen("./errors.tmp", "w");
-	
-    fprintf(ep, "\n"
-        "|--------------------------Errors--------------------------|\n"
-        "| Occurrence | Lexeme         | Description         | Line |\n"
-        "|------------|----------------|---------------------|------|\n"
-    );
-
-    yylex();
-    
-    fclose(ep);
-    fclose(fp);
-	
-	if (errorOccurrences == 1) {
-    	remove("./errors.tmp");
-		return 0;
-	}
- 
-    ep = fopen("./errors.tmp", "r");
-    char ch;
-    while ((ch = fgetc(ep)) != EOF)
-        putchar(ch);
-    fclose(ep);
-
-    remove("./errors.tmp");
-    printf("\n");
-
-    return 0;
-}
