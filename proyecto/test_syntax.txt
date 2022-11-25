@@ -1,1 +1,20 @@
-int hola;
+int _hola <- 5 - 4 *2 / (4-5);
+int _hola <- 5;
+
+fun _saludar(int _a) {
+    int _hola <- 'mundo';
+    int _hola;
+    int _hola <- 5 > 5 & false;
+
+    if (5>2) {
+    }
+    else {
+    }
+    return 0;
+}
+
+while (true) {
+    if (false) {
+        
+    }
+}

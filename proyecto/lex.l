@@ -34,12 +34,8 @@
 "else"          { return ELSE_KW;    }
 "while"         { return WHILE_KW;   }
 "for"           { return FOR_KW;     }
-"var"           { return VAR_KW;     }
-"is"            { return IS_KW;      }
-"null"          { return NULL_KW;    }
 
-[a-z][a-zA-Z0-9_]*  { return FUNCTION_NAME; }
-[a-z_][a-zA-Z0-9_]* { return IDENTIFIER;    }
+[_][a-zA-Z0-9_]* { return IDENTIFIER;    }
 
 "("             { return OPEN_PAR;    }
 ")"             { return CLOSE_PAR;   }

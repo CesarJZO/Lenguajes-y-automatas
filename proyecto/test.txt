@@ -1,10 +1,12 @@
-var variable <- 1.5;
+int _variable <- 1.5;
 
 </>nohace nada</>
-if (hola_25_v1 & variable = 75) {
+if (_hola_25_v1 & _hola) {
     true:)com en_tario
 }
 
-fun imprimir() print;
+fun _imprimir() {
+
+}
 
 txt nombre ='juan'
