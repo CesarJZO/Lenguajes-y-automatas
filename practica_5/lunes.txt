@@ -1,0 +1,40 @@
+program #uno;
+
+var
+
+#dos : integer;
+
+#x,#cuatro  : boolean;
+
+begin
+    //#x := :=
+
+    #x := 10 - (32 * 8 ) + (73 / 56);
+
+    if  (#x = #y) then
+    begin
+
+        while ( #dos<= 7) do
+        begin
+
+            #dos := 78 /4 ;
+
+            repeat
+            begin
+                #cuatro := #x + #x ;
+            end
+            until (#xtres = 10 ) ;
+
+        end
+    end
+    else
+    begin
+        input(#dos);
+        if (true) then
+        begin
+            if (true) then
+            begin
+            end
+        end
+    end
+end
