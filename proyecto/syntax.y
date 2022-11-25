@@ -4,6 +4,7 @@ int yyerror(char*);
 %}
 
 %token IDENTIFIER
+%token FUNCTION_NAME
 
 %token ADD_OP
 %token SUB_OP
@@ -53,56 +54,73 @@ int yyerror(char*);
 %%
 
 program:
-	  head				 			{ printf("Solo encabezado\n");   }
-	| head declaration_block 		{ printf("Encabezado y bloque de declaraciones\n"); 	 }
-	| head declaration_block body	{ printf("Encabezado, bloque de declaraciones y cuerpo\n"); }
+	expressions
 	;
 
-head:
-	  PROGRAM_KW IDENTIFIER EOE
-	;
-
-declaration_block:
-	  VAR_KW var_declarations
-	| VAR_KW
-	;
-
-var_declarations:
-	  identifiers DATA_ASSIGN data_type EOE var_declarations
-	| identifiers DATA_ASSIGN data_type EOE
-	;
-
-identifiers:
-	  IDENTIFIER
-	| IDENTIFIER SEPARATOR identifiers
-	;
-
-data_type: INTEGER_KW | BOOLEAN_KW;
-
-body:
-	  BEGIN_KW END_KW
-	| BEGIN_KW expressions END_KW
+expressions:
+	  expression expressions
+	| expression
 	;
 
 instructions:
 	  instruction instructions
-	| instruction EOE
+	| instruction SEMICOLON
 	;
 
-instruction: assignation | io;
+instruction: var_declaration | assignation | function_call;
+
+expression: instructions | if | while | for | function_def;
+
+body:
+	  OPEN_BLOCK CLOSE_BLOCK
+	| OPEN_BLOCK expressions CLOSE_BLOCK
+	;
+
+function_body:
+	OPEN_BLOCK CLOSE_BLOCK
+	| OPEN_BLOCK return CLOSE_BLOCK
+	| OPEN_BLOCK expressions return CLOSE_BLOCK
+	;
+
+return:
+	  RETURN_KW SEMICOLON
+	| RETURN_KW value SEMICOLON
+	| RETURN_KW instruction SEMICOLON
+	;
+
+var_declaration:
+	  data_type IDENTIFIER SEMICOLON
+	| data_type IDENTIFIER ASSIGNER value SEMICOLON
+	;
+
+data_type: INT_KW | DEC_KW | TXT_KW | BOOL_KW | CHAR_KW;
 
 assignation:
 	  IDENTIFIER ASSIGNER result
 	| IDENTIFIER ASSIGNER logic_result
+	| IDENTIFIER ASSIGNER NULL_KW
 	;
 
-io:
-	  INPUT_KW | OUTPUT_KW
-	| io OPEN_PAR IDENTIFIER CLOSE_PAR
+function_def:
+	FUN_KW FUNCTION_NAME OPEN_PAR CLOSE_PAR function_body
+	| FUN_KW FUNCTION_NAME OPEN_PAR args CLOSE_PAR function_body
+	;
+
+function_call:
+	  FUNCTION_NAME OPEN_PAR CLOSE_PAR
+	| FUNCTION_NAME OPEN_PAR args CLOSE_PAR
+	| function_call body
+	;
+
+args:
+	  data_type IDENTIFIER
+	| data_type IDENTIFIER COMMA args
 	;
 
 value:
 	  INTEGER
+	| REAL
+	| TEXT
 	| IDENTIFIER
 	| TRUE_KW | FALSE_KW
 	;
@@ -115,23 +133,16 @@ result:
 
 operator: SUB_OP | ADD_OP | MUL_OP | DIV_OP;
 
-expressions:
-	  expression expressions
-	| expression
-	;
-
-expression: instructions | if | while | repeat;
-
 logic_result:
 	  result
 	| logic_result logic_operator logic_result
 	| OPEN_PAR logic_result CLOSE_PAR
 	;
 
-logic_operator: MORE_EQUAL | MORE_THAN | LESS_EQUAL | LESS_THAN | EQUAL_TO;
+logic_operator: MORE_EQUAL | MORE_THAN | LESS_EQUAL | LESS_THAN | EQUAL_TO | AND_OP | OR_OP | NOT_OP;
 
 if:
-	IF_KW logic_result THEN_KW body
+	IF_KW OPEN_PAR logic_result CLOSE_PAR body
 	| if else
 	;
 
@@ -140,12 +151,14 @@ else:
 	;
 
 while:
-	WHILE_KW logic_result DO_KW body
+	WHILE_KW OPEN_PAR logic_result CLOSE_PAR body
 	;
 
-repeat:
-	REPEAT_KW body UNTIL_KW logic_result EOE
-	;
+for:
+	FOR_KW OPEN_PAR CLOSE_PAR
+	| FOR_KW OPEN_PAR instruction SEMICOLON logic_result SEMICOLON instruction CLOSE_PAR
+	| for body
+	; 
 
 %%
 

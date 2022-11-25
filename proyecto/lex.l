@@ -38,7 +38,8 @@
 "is"            { return IS_KW;      }
 "null"          { return NULL_KW;    }
 
-[a-z_][a-zA-Z0-9_]* { return IDENTIFIER; }
+[a-z][a-zA-Z0-9_]*  { return FUNCTION_NAME; }
+[a-z_][a-zA-Z0-9_]* { return IDENTIFIER;    }
 
 "("             { return OPEN_PAR;    }
 ")"             { return CLOSE_PAR;   }

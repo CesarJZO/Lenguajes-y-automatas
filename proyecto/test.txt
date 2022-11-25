@@ -1,8 +1,10 @@
 var variable <- 1.5;
+
 </>nohace nada</>
 if (hola_25_v1 & variable = 75) {
     true:)com en_tario
 }
+
 fun imprimir() print;
-?//c
+
 txt nombre ='juan'
