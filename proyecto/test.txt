@@ -2,7 +2,7 @@ int _variable <- 1.5;
 
 </>nohace nada</>
 if (_hola_25_v1 & _hola) {
-    true:)com en_tario
+    true:)com en_tario <- Error de sintaxis
 }
 
 fun _imprimir() {

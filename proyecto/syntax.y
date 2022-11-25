@@ -1,4 +1,5 @@
 %{
+#include <stdlib.h>
 int yylex();
 int yyerror(char*);
 %}
@@ -50,7 +51,7 @@ int yyerror(char*);
 %%
 
 start:
-	expressions
+	expressions { printf("¡Análisis exitoso!\n"); }
 ;
 
 expressions:
@@ -58,7 +59,7 @@ expressions:
 	| expression
 ;
 
-expression: var_declaration | fun_def | return | if | while | for;
+expression: var_declaration | assignation | fun_def | return | if | while | for;
 
 var_declaration:
 	data_type IDENTIFIER SEMICOLON
@@ -134,6 +135,7 @@ logic_operator:
 int yyerror(char *e)
 {
 	printf("Error: %s\n", e);
+	exit(1);
 }
 
 int main()
