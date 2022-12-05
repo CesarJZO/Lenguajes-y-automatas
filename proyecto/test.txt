@@ -2,11 +2,14 @@ int _variable <- 1.5;
 
 </>nohace nada</>
 if (_hola_25_v1 & _hola) {
-    true:)com en_tario <- Error de sintaxis
+    :)com en_tario
 }
 
-fun _imprimir() {
-
+fun _imprimir(int _a) {
+	if (_a <= 48 & _verdad) {
+		:)return true;
+	}
+	:)return false;
 }
 
-txt nombre ='juan'
+txt _var1 <- 'Hello, world!';

@@ -70,7 +70,7 @@ assignation:
 	IDENTIFIER ASSIGNER result SEMICOLON
 ;
 
-result: value | math_result | logic_result;
+result: math_result | logic_result;
 
 data_type: INT_KW | DEC_KW | TXT_KW | BOOL_KW | CHAR_KW;
 
@@ -108,7 +108,7 @@ while:
 ;
 
 for:
-	FOR_KW OPEN_PAR var_declaration SEMICOLON logic_result SEMICOLON assignation CLOSE_PAR block
+	FOR_KW OPEN_PAR var_declaration logic_result SEMICOLON assignation CLOSE_PAR block
 ;
 
 math_result:

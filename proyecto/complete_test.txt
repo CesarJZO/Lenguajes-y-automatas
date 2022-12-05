@@ -1,0 +1,20 @@
+</>Programa de prueba</>
+int _identificador;
+txt _hola <- 'mundo';
+_identificador <- 5;
+dec _real <- 32.1;
+
+fun _funcion() {
+    if (5 > _identificador) {
+        var <- false; :) Error léxico
+    }
+    else
+        _identificador <- 4; :) Error sintáctico
+    return true;
+}
+
+while (_foo > 15) {
+    for (int _i; _i < _foo; _i <- _i + 1;) {
+        _foo <- 15;
+    }
+}

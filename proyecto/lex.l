@@ -51,9 +51,9 @@
 
 [0-9]+          { return INTEGER; }
 [0-9]+"."[0-9]+ { return REAL; }
-"\'".*"\'"      { return TEXT; }
+"'".*"'"      { return TEXT; }
 
-.               { printf("Lexical error\n"); }
+.               { printf("Lexical error\n"); return 0; }
 
 %%
 
