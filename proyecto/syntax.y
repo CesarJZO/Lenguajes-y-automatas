@@ -1,3 +1,4 @@
+/* Archivo syntax.y */
 %{
 #include <stdlib.h>
 int yylex();
